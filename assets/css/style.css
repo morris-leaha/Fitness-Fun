@@ -53,11 +53,19 @@ i {
 }
 
 .signup {
-    margin-top: 11rem;
+    margin-top: 10rem;
 }
 
 .login {
-    margin-top: 16rem;
+    margin-top: 14rem;
+}
+
+.calorie-view, .progress-view {
+    margin-top: 5rem;
+}
+
+.breakfast-view, .lunch-view, .dinner-view, .schedule-view {
+    margin-top: 1rem;
 }
 
 
