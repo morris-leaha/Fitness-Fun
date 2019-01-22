@@ -44,22 +44,28 @@ body {
     color: white;
 }
 
-.signup {
-    padding-left: 12rem;
-    padding-right: 12rem;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
+i {
+    margin-right: 0.25rem;
 }
 
 .card {
     background: rgba(255, 255, 255, 0.35);
-    margin-top: 5rem;
 }
+
+.signup {
+    margin-top: 11rem;
+}
+
+.login {
+    margin-top: 16rem;
+}
+
 
 .sticky-footer {
     flex-shrink: 0;
     font-size: 0.8rem;
     color: rgb(216, 213, 208);
+    margin-top: 2rem;
 }
 
 @media screen and (max-width: 991px) {

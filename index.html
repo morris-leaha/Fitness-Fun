@@ -21,11 +21,11 @@
 <body>
 
   <div class="container" id="main-container">
-    <div class="header">
+    <section class="header">
       <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
           <a class="navbar-brand" href="#">
-            <i class="fas fa-dumbbell"></i>&nbsp;FitnessFun
+            <i class="fas fa-dumbbell"></i>FitnessFun
           </a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links"
@@ -36,72 +36,84 @@
           <div class="collapse navbar-collapse" id="navbar-links">
             <ul class="navbar-nav mr-auto">
               <li id="profile" class="nav-item">
-                <a class="nav-link" href="#"><i class="far fa-user"></i>&nbsp;Profile</a>
+                <a class="nav-link" href="#"><i class="far fa-user"></i>Profile</a>
               </li>
               <li id="about" class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-info"></i>&nbsp;About</a>
+                <a class="nav-link" href="#"><i class="fas fa-info"></i>About</a>
               </li>
               <li id="features" class="nav-item">
-                <a class="nav-link" href="#"><i class="far fa-clipboard"></i>&nbsp;Features</a>
+                <a class="nav-link" href="#"><i class="far fa-clipboard"></i>Features</a>
               </li>
-              <li id="share" class="nav-item">
-                <a class="nav-link" href="#"><i class="far fa-share-square"></i>&nbsp;Share</a>
+              <li id="share" class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="far fa-share-square"></i>Share
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#"><i class="far fa-envelope"></i>Email</a>
+                  <a class="dropdown-item" href="#"><i class="fas fa-sms"></i>Text</a>
+                  <a class="dropdown-item" href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                  <a class="dropdown-item" href="#"><i class="fab fa-github"></i>GitHub</a>
+                  <a class="dropdown-item" href="#"><i class="fab fa-slack"></i>Slack</a>
+                </div>
               </li>
             </ul>
             <span class="navbar-text">
-              <a href="#">Sign Up</a>
-              <a href="#">Log In</a>
+              <a href="index.html">Sign Up</a>
+              <a href="login.html">Log In</a>
             </span>
           </div>
         </nav>
       </header>
-    </div>
+    </section>
 
 
-    <section class="main-section">
+    <main class="main-section">
       <div class="row justify-content-center">
-        <div class="signup col">
-          <div class="card">
+        <div class="col-9">
+          <div class="signup card">
+
+            <!-- PERSONAL INFORMATION -->
             <div class="card-body">
-              <form id="create-user">
+              <form>
 
                 <div class="form-row">
 
                   <div class="form-group col-md-6">
                     <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName">
+                    <input type="text" class="form-control form-control-sm" id="firstName">
                   </div>
 
                   <div class="form-group col-md-6">
                     <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName">
+                    <input type="text" class="form-control form-control-sm" id="lastName">
                   </div>
+
                 </div>
 
-                <div class="form-group">
-                  <label for="inputEmail4">Email</label>
-                  <input type="email" class="form-control" id="inputEmail4">
-                </div>
+                <!-- <div class="form-row">
 
-                <div class="form-group">
-                  <label for="inputAddress">Address</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                </div>
-
-                <div class="form-group">
-                  <label for="inputAddress2">Address 2</label>
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
+                  <div class="form-group col-md-8">
+                    <label for="inputAddress">Address</label>
+                    <input type="text" class="form-control form-control-sm" id="inputAddress" placeholder="1234 Main St">
                   </div>
 
                   <div class="form-group col-md-4">
+                    <label for="inputAddress2">Address 2</label>
+                    <input type="text" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                  </div>
+
+                </div> -->
+
+                <!-- <div class="form-row">
+                  <div class="form-group col-md-5">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control form-control-sm" id="inputCity">
+                  </div>
+
+                  <div class="form-group col-md-5">
                     <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
+                    <select id="inputState" class="form-control form-control-sm">
                       <option selected>Choose...</option>
                       <option>Alabama</option>
                       <option>Alaska</option>
@@ -125,6 +137,8 @@
                       <option>Maryland</option>
                       <option>Massachusetts</option>
                       <option>Michigan</option>
+                      <option>Minnesota</option>
+                      <option>Mississippi</option>
                       <option>Missouri</option>
                       <option>Montana</option>
                       <option>Nebraska</option>
@@ -156,21 +170,50 @@
 
                   <div class="form-group col-md-2">
                     <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
+                    <input type="text" class="form-control form-control-sm" id="inputZip">
+                  </div> -->
+
+                  <div class="form-group">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control form-control-sm" id="inputEmail4">
                   </div>
+
+                  <div class="form-group">
+                    <label for="userName">Username</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text form-control-sm">@</div>
+                      </div>
+                      <input type="text" class="form-control form-control-sm" id="userName" placeholder="Username">
+                    </div>
+                  </div>
+
+                <div class="form-row">
+
+
+
+                  <div class="form-group col-md-6">
+                    <label for="password">Password</label>
+                    <input type="text" class="form-control form-control-sm" id="password">
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for="passwordConfirm">Confirm Password</label>
+                    <input type="text" class="form-control form-control-sm" id="passwordConfirm">
+                  </div>
+
                 </div>
 
-                <button type="submit" class="btn btn-secondary">Sign Up</button>
-
+                <button type="submit" class="btn btn-secondary sign-up">Sign Up</button>
               </form>
+
             </div>
+
           </div>
 
         </div>
       </div>
-
-
-    </section>
+    </main>
 
   </div>
 
