@@ -73,24 +73,33 @@
                 <div class="col-md-4">
                     <div class="login card">
 
-                        <!-- LOGIN IN -->
+                        <!-- CREATE USER PROFILE -->
                         <div class="card-header text-center">Create Your Profile</div>
                         <div class="card-body">
                             <form>
 
                                 <div class="form-group col">
-                                    <label for="user-age">Age</label>
+                                    <label for="user-age">Age (years)</label>
                                     <input type="text" class="form-control form-control-sm" id="user-age">
                                 </div>
 
                                 <div class="form-group col">
-                                    <label for="user-weight">Current Weight</label>
+                                    <label for="user-weight">Current Weight (lbs)</label>
                                     <input type="text" class="form-control form-control-sm" id="user-weight">
                                 </div>
 
-                                <div class="form-group col">
-                                    <label for="user-height">Current Height</label>
-                                    <input type="text" class="form-control form-control-sm" id="user-height">
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-6">
+                                        <label for="user-height-feet">Height (feet)</label>
+                                        <input type="text" class="form-control form-control-sm" id="user-height-feet">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="user-height-inches">Height (inches)</label>
+                                        <input type="text" class="form-control form-control-sm" id="user-height-inches">
+                                    </div>
+
                                 </div>
 
                                 <button type="submit" class="btn btn-secondary sign-up">Submit</button>
