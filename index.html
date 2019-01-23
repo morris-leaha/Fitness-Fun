@@ -15,7 +15,7 @@
     <!-- LINK TO FONT AWESOME -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
-        <!-- LINK TO FIREBASE APP -->
+    <!-- LINK TO FIREBASE APP -->
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
 
     <!-- LINKS TO FIREBASE AUTH AND FIREBASE DATABASE -->
@@ -41,14 +41,17 @@
 
                     <div class="collapse navbar-collapse" id="navbar-links">
                         <ul class="navbar-nav mr-auto">
+                            <li id="dashboard" class="nav-item">
+                                <a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                            </li>
                             <li id="profile" class="nav-item">
                                 <a class="nav-link" href="profile.html"><i class="far fa-user"></i>Profile</a>
                             </li>
                             <li id="about" class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-info"></i>About</a>
+                                <a class="nav-link" href="#"><i class="fas fa-utensils"></i>Nutrition</a>
                             </li>
                             <li id="features" class="nav-item">
-                                <a class="nav-link" href="#"><i class="far fa-clipboard"></i>Features</a>
+                                <a class="nav-link" href="#"><i class="fas fa-running"></i>Exercise</a>
                             </li>
                             <li id="share" class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -59,11 +62,14 @@
                                     <a class="dropdown-item" href="#"><i class="far fa-envelope"></i>Email</a>
                                     <a class="dropdown-item" href="#"><i class="fas fa-sms"></i>Text</a>
                                     <a class="dropdown-item" href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                                    <a class="dropdown-item" href="#"><i class="fab fa-facebook-square"></i>Facebook</a>
                                     <a class="dropdown-item" href="#"><i class="fab fa-github"></i>GitHub</a>
                                     <a class="dropdown-item" href="#"><i class="fab fa-slack"></i>Slack</a>
                                 </div>
                             </li>
                         </ul>
+
+
                         <span class="navbar-text">
                             <a href="signup.html">Sign Up</a>
                             <a href="index.html">Log In</a>
@@ -80,8 +86,8 @@
                     <div class="login card">
 
                         <!-- LOGIN IN -->
-                        <div class="card-header text-center">User Sign In</div>
-                        <div class="card-body">
+                        <div class="card-header text-center">Current User Sign In</div>
+                        <div class="card-body user-login">
                             <form>
 
                                 <div class="form-group">
@@ -97,13 +103,21 @@
 
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="text" class="form-control form-control-sm" id="password">
+                                    <input type="text" class="form-control form-control-sm" id="password" placeholder="Password">
                                 </div>
 
                                 <button type="submit" class="btn btn-secondary sign-up">Sign In</button>
                             </form>
-                        </div>
 
+                        </div>
+                        <div class="card-body login-redirects">
+                            <div>
+                                <a class="redirect" href="signup.html">Not a user already? Sign up!</a>
+                            </div>
+                            <div>
+                                <a class="redirect" href="#">Forgot password?</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
