@@ -15,7 +15,6 @@ body {
 
 .navbar-dark .navbar-text a {
     color: rgba(255,255,255,.8);
-    border-right: 2px rgba(255,255,255,.25) solid;
     text-decoration: none;
     padding-right: 1rem;
 }
@@ -23,6 +22,14 @@ body {
 .navbar-dark .navbar-text a:last-child {
     border-right: none;
     padding: 0 0 0 0.7rem;
+}
+
+.dropdown-item:hover, .dropdown-divider:focus {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.dropdown-divider {
+    margin: 0.1rem 1rem;
 }
 
 .hero-image {
