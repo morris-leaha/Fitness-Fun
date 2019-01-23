@@ -9,14 +9,18 @@ var config = {
 
 firebase.initializeApp(config);
 
-$("#sign-up-btn").on("click", function(){
+$("#sign-up-btn").on("click", function(event){
 
-    var email;
-    var firstName;
-    var lastName;
-    var username;
-    var password;
-    var confirmPass;
+    event.preventDefault();
+
+    var email = $("#inputEmail4").val().trim();
+    var firstName = $("#firstName").val().trim();
+    var lastName = $("#lastName").val().trim();
+    var username = $("#userName").val().trim();
+    var password = $("#password").val().trim();
+    var confirmPass = $("#passwordConfirm").val().trim();
+
+    console.log(email, firstName, lastName, username, password, confirmPass);
 
     if(email && username && firstName && lastName && password && confirmPass && confirmPass === password){
         
