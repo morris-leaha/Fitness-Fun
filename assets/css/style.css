@@ -1,0 +1,83 @@
+html, body {
+    background: url(../images/chase-kinney-801570-unsplash.jpg) no-repeat center fixed; 
+    background-size: cover;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1 0 auto;
+}
+
+.navbar-dark .navbar-text a {
+    color: rgba(255,255,255,.8);
+    border-right: 2px rgba(255,255,255,.25) solid;
+    text-decoration: none;
+    padding-right: 1rem;
+}
+
+.navbar-dark .navbar-text a:last-child {
+    border-right: none;
+    padding: 0 0 0 0.7rem;
+}
+
+.hero-image {
+    background-image: url("../images/chase-kinney-801570-unsplash.jpg");
+    background-color: #cccccc;
+    height: 800px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+  
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+i {
+    margin-right: 0.25rem;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.signup {
+    margin-top: 10rem;
+}
+
+.login {
+    margin-top: 14rem;
+}
+
+.calorie-view, .progress-view {
+    margin-top: 5rem;
+}
+
+.breakfast-view, .lunch-view, .dinner-view, .schedule-view {
+    margin-top: 1rem;
+}
+
+
+.sticky-footer {
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    color: rgb(216, 213, 208);
+    margin-top: 2rem;
+}
+
+@media screen and (max-width: 991px) {
+    .nav-link {
+        text-indent: 0.9rem;
+    }
+}
