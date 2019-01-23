@@ -9,8 +9,12 @@ body {
     flex-direction: column;
 }
 
-.container {
+.container-fluid {
     flex: 1 0 auto;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
 }
 
 .navbar-dark .navbar-text a {
@@ -30,6 +34,14 @@ body {
 
 .dropdown-divider {
     margin: 0.1rem 1rem;
+}
+
+.fa-running {
+    font-size: 1.15rem;
+}
+
+.fa-user-circle {
+    font-size: 1.15rem;
 }
 
 .hero-image {
