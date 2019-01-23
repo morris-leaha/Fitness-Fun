@@ -29,8 +29,9 @@ $("#sign-up-btn").on("click", function(event){
             var errorMessage = error.message;
 
             console.log(errorCode);
-            console.log(errorMaster);
+            console.log(errorMessage);
         });
+
     } else {
 
         console.log("Create user failed");
