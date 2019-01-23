@@ -65,7 +65,7 @@ i {
 }
 
 .signup {
-    margin-top: 10rem;
+    margin-top: 7rem;
 }
 
 .login {
@@ -74,6 +74,7 @@ i {
 
 .login-redirects {
     border-top: 1px solid rgba(0,0,0,.125);
+    font-size: 0.8rem;
 }
 
 .login-redirects > div {
