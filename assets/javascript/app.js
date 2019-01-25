@@ -9,6 +9,8 @@ var config = {
 
 firebase.initializeApp(config);
 
+var currentUser;
+
 $("#sign-up-btn").on("click", function(event){
 
     event.preventDefault();
@@ -32,9 +34,51 @@ $("#sign-up-btn").on("click", function(event){
             console.log(errorMessage);
         });
 
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              currentUser = user;
+              console.log(user);
+            } else {
+              console.log("Log In Failed");
+            }
+          });
+
+        window.location.href = "index.html";
+        
+
     } else {
 
         console.log("Create user failed");
     }
     
 });
+
+$("#login-btn").on("click", function(event){
+
+    event.preventDefault();
+
+    var email = $("#email-login").val().trim();
+    var password = $("#password-login").val().trim();
+
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        console.log(errorCode);
+        console.log(errorCode);
+        
+    });
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          currentUser = user;
+          console.log(user);
+        } else {
+          console.log("Log In Failed");
+        }
+    });
+
+    window.location.href = "index.html";
+});
+
