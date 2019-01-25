@@ -115,12 +115,12 @@ a.redirect:active {
     background: rgba(255, 255, 255,0.9);
 }
 
-tbody {
-    font-size: 1.25rem;
+.user-curr-height {
+    border-bottom: 1px solid #dee2e6;
 }
 
 img {
-    margin-top: 6rem;
+    margin-top: 5rem;
     border-radius: 50%;
     height: 15rem;
 }
