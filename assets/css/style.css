@@ -119,6 +119,12 @@ tbody {
     font-size: 1.25rem;
 }
 
+img {
+    margin-top: 6rem;
+    border-radius: 50%;
+    height: 15rem;
+}
+
 .sticky-footer {
     flex-shrink: 0;
     font-size: 0.8rem;
