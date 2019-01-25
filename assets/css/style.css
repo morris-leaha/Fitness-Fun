@@ -110,8 +110,12 @@ a.redirect:active {
     text-decoration: none;
 }
 
-.calorie-view, .progress-view, .schedule-view {
+.calorie-view, .progress-view, .schedule-view, .nutrition-view {
     margin-top: 6rem;
+    background: rgba(255, 255, 255,0.9);
+}
+
+.man-nutrition-view {
     background: rgba(255, 255, 255,0.9);
 }
 
@@ -123,6 +127,10 @@ img {
     margin-top: 5rem;
     border-radius: 50%;
     height: 15rem;
+}
+
+.user-nutr-add {
+    margin-bottom: 0;
 }
 
 .sticky-footer {
