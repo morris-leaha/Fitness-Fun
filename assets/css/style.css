@@ -110,14 +110,14 @@ a.redirect:active {
     text-decoration: none;
 }
 
-.calorie-view, .progress-view {
-    margin-top: 5rem;
+.calorie-view, .progress-view, .schedule-view {
+    margin-top: 6rem;
+    background: rgba(255, 255, 255,0.9);
 }
 
-.breakfast-view, .lunch-view, .dinner-view, .schedule-view {
-    margin-top: 1rem;
+tbody {
+    font-size: 1.25rem;
 }
-
 
 .sticky-footer {
     flex-shrink: 0;

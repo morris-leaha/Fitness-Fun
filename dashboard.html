@@ -97,7 +97,121 @@
 
 
         <main class="main-section">
-            
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="card calorie-view">
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <table class="table table-borderless table-hover text-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Suggested Daily Calories</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">Nutritional Calories</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">Exercise (Burned) Calories</th>
+                                                <th scope="col"></th>
+                                                <th scope="col">Remaining Daily Calories</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td id="user-dailyCals">1500</td>
+                                                <td id="operator">-</td>
+                                                <td id="user-nutrCals">0</td>
+                                                <td id="operator">+</td>
+                                                <td id="user-exercCal">0</td>
+                                                <td id="operator">=</td>
+                                                <td id="user-remainCal">1500</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card progress-view mt-3">
+                    <div class="card-header float-left">
+                        <div class="choose-progress form-group col-4 px-0">
+                            <label for="progressView"><b>Progress View</b></label>
+                            <select id="progressView" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>Today</option>
+                                <option>This Week</option>
+                                <option>This Month</option>
+                                <option>This Year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <div class="col">
+                                Chart Data
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card schedule-view mt-3">
+                    <div class="card-header">
+                        <b>Schedule Reminders</b>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="choose-reminder form-group col-3 px-0">
+                            <label for="reminderView">Reminder</label>
+                            <select id="reminderView" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>Text</option>
+                                <option>Email</option>
+                            </select>
+                        </div>
+
+                        <div class="choose-schedule-day form-group col-3 px-0">
+                            <label for="dayView">Day</label>
+                            <select id="dayView" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option>Friday</option>
+                                <option>Saturday</option>
+                                <option>Sunday</option>
+                            </select>
+                        </div>
+
+                        <div class="choose-schedule-time form-group col-3 px-0">
+                            <label for="timeView">Time (HH:mm)</label>
+                            <input type="text" class="form-control form-control" id="time" placeholder="12:00">
+                        </div>
+
+                        <div class="choose-schedule-freq form-group col-3 px-0">
+                            <label for="freqView">Frequency</label>
+                            <select id="freqView" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>Daily</option>
+                                <option>Weekly</option>
+                            </select>
+                        </div>
+
+                        <div class="choose-schedule-for-what form-group col-3 px-0">
+                            <label for="forWhatView">For What</label>
+                            <select id="forWhatView" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>Nutrition</option>
+                                <option>Exercise</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-secondary" type="button" id="time-btn">Save</button>
+
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
