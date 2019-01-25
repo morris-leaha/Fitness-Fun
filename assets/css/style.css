@@ -110,7 +110,7 @@ a.redirect:active {
     text-decoration: none;
 }
 
-.calorie-view, .progress-view, .schedule-view, .nutrition-view {
+.calorie-view, .progress-view, .schedule-view, .nutrition-view, .user-profile {
     margin-top: 6rem;
     background: rgba(255, 255, 255,0.9);
 }
@@ -124,7 +124,6 @@ a.redirect:active {
 }
 
 img {
-    margin-top: 5rem;
     border-radius: 50%;
     height: 15rem;
 }
