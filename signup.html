@@ -26,29 +26,31 @@
 
 <body>
 
-  <div class="container" id="main-container">
+  <div class="container-fluid" id="main-container">
     <section class="header">
       <header>
+        <!-- NAVBAR BRAND -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="index.html">
             <i class="fas fa-dumbbell"></i>FitnessFun
           </a>
-
+          <!-- NAV TOGGLER BUTTON -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
+          <!-- NAVBAR LINKS -->
           <div class="collapse navbar-collapse" id="navbar-links">
             <ul class="navbar-nav mr-auto">
-              <li id="profile" class="nav-item">
-                <a class="nav-link" href="profile.html"><i class="far fa-user"></i>Profile</a>
+              <li id="dashboard" class="nav-item">
+                <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
               </li>
               <li id="about" class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-info"></i>About</a>
+                <a class="nav-link" href="#"><i class="fas fa-utensils"></i>Nutrition</a>
               </li>
               <li id="features" class="nav-item">
-                <a class="nav-link" href="#"><i class="far fa-clipboard"></i>Features</a>
+                <a class="nav-link" href="#"><i class="fas fa-running"></i>Exercise</a>
               </li>
               <li id="share" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
@@ -59,15 +61,34 @@
                   <a class="dropdown-item" href="#"><i class="far fa-envelope"></i>Email</a>
                   <a class="dropdown-item" href="#"><i class="fas fa-sms"></i>Text</a>
                   <a class="dropdown-item" href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                  <a class="dropdown-item" href="#"><i class="fab fa-facebook-square"></i>Facebook</a>
                   <a class="dropdown-item" href="#"><i class="fab fa-github"></i>GitHub</a>
                   <a class="dropdown-item" href="#"><i class="fab fa-slack"></i>Slack</a>
                 </div>
               </li>
             </ul>
-            <span class="navbar-text">
-              <a href="signup.html">Sign Up</a>
-              <a href="index.html">Log In</a>
-            </span>
+
+            <!-- USER DROPDOWN LINKS (ON NAV) -->
+            <div id="user-dropdown" class="dropdown">
+              <ul class="navbar-nav mr-auto">
+                <li id="user-dropdown" class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-circle"></i>User
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="profile.html"><i class="fas fa-user-cog"></i>Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="signup.html"><i class="fas fa-user-plus"></i>Create New
+                      Account</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="index.html"><i class="fas fa-sign-in-alt"></i>Sign
+                      In</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i>Sign Out</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </nav>
       </header>
@@ -76,11 +97,11 @@
 
     <main class="main-section">
       <div class="row justify-content-center">
-        <div class="col-9">
+        <div class="col-md-6">
           <div class="signup card">
-            
-            <!-- PERSONAL INFORMATION -->
-            <div class="card-header text-center">Sign Up</div>
+
+            <!-- USER SIGN UP FORM -->
+            <div class="card-header text-center">New User Sign Up</div>
             <div class="card-body">
               <form>
 
@@ -98,102 +119,20 @@
 
                 </div>
 
-                <!-- <div class="form-row">
+                <div class="form-group">
+                  <label for="inputEmail4">Email</label>
+                  <input type="email" class="form-control form-control-sm" id="inputEmail4">
+                </div>
 
-                  <div class="form-group col-md-8">
-                    <label for="inputAddress">Address</label>
-                    <input type="text" class="form-control form-control-sm" id="inputAddress" placeholder="1234 Main St">
-                  </div>
-
-                  <div class="form-group col-md-4">
-                    <label for="inputAddress2">Address 2</label>
-                    <input type="text" class="form-control form-control-sm" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                  </div>
-
-                </div> -->
-
-                <!-- <div class="form-row">
-                  <div class="form-group col-md-5">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control form-control-sm" id="inputCity">
-                  </div>
-
-                  <div class="form-group col-md-5">
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control form-control-sm">
-                      <option selected>Choose...</option>
-                      <option>Alabama</option>
-                      <option>Alaska</option>
-                      <option>Arizona</option>
-                      <option>Arkansas</option>
-                      <option>California</option>
-                      <option>Colorado</option>
-                      <option>Connecticut</option>
-                      <option>Delaware</option>
-                      <option>Florida</option>
-                      <option>Georgia</option>
-                      <option>Hawaii</option>
-                      <option>Idaho</option>
-                      <option>Illinois</option>
-                      <option>Indiana</option>
-                      <option>Iowa</option>
-                      <option>Kansas</option>
-                      <option>Kentucky</option>
-                      <option>Louisiana</option>
-                      <option>Maine</option>
-                      <option>Maryland</option>
-                      <option>Massachusetts</option>
-                      <option>Michigan</option>
-                      <option>Minnesota</option>
-                      <option>Mississippi</option>
-                      <option>Missouri</option>
-                      <option>Montana</option>
-                      <option>Nebraska</option>
-                      <option>Nevada</option>
-                      <option>New Hampshire</option>
-                      <option>New Jersey</option>
-                      <option>New Mexico</option>
-                      <option>New York</option>
-                      <option>North Carolina</option>
-                      <option>North Dakota</option>
-                      <option>Ohio</option>
-                      <option>Oklahoma</option>
-                      <option>Oregon</option>
-                      <option>Pennsylvania</option>
-                      <option>Rhode Island</option>
-                      <option>South Carolina</option>
-                      <option>South Dakota</option>
-                      <option>Tennessee</option>
-                      <option>Texas</option>
-                      <option>Utah</option>
-                      <option>Vermont</option>
-                      <option>Virginia</option>
-                      <option>Washington</option>
-                      <option>West Virginia</option>
-                      <option>Wisconsin</option>
-                      <option>Wyoming</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control form-control-sm" id="inputZip">
-                  </div> -->
-
-                  <div class="form-group">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control form-control-sm" id="inputEmail4">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="userName">Username</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text form-control-sm">@</div>
-                      </div>
-                      <input type="text" class="form-control form-control-sm" id="userName" placeholder="Username">
+                <div class="form-group">
+                  <label for="userName">Username</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text form-control-sm">@</div>
                     </div>
+                    <input type="text" class="form-control form-control-sm" id="userName" placeholder="Username">
                   </div>
+                </div>
 
                 <div class="form-row">
 
@@ -209,11 +148,20 @@
 
                 </div>
 
+<<<<<<< HEAD
                 <button type="submit" class="btn btn-secondary sign-up" id="sign-up-btn">Sign Up</button>
               </form>
+=======
+                <button type="submit" class="btn btn-secondary sign-up">Sign Up</button>
+>>>>>>> 7cbf69e4b6eabcdb4684ea3b43c143b1de2f3df3
 
+              </form>
             </div>
-
+            <div class="card-body login-redirects">
+              <div>
+                <a class="redirect" href="index.html">User already? Sign in here!</a>
+              </div>
+            </div>
           </div>
 
         </div>
