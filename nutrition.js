@@ -7,7 +7,6 @@
     storageBucket: "",
     messagingSenderId: "381935885658"
   };
-  
   firebase.initializeApp(config);
 
 
@@ -71,7 +70,7 @@
       //var mealdb = childSnapshot.val().meal;
   
       // Create the new row
-    var nutrionRow = $("<tr>").append(
+    var nutrionRow = $("<tr class='text-center'>").append(
       $("<td>").text(fooddb),
       $("<td>").text(servingdb),
       $("<td>").text(caloriesdb),
