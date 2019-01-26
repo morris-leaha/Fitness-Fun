@@ -47,10 +47,10 @@
                                 <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             </li>
                             <li id="about" class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-utensils"></i>Nutrition</a>
+                                <a class="nav-link" href="nutrition.html"><i class="fas fa-utensils"></i>Nutrition</a>
                             </li>
                             <li id="features" class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-running"></i>Exercise</a>
+                                <a class="nav-link" href="exercise.html"><i class="fas fa-running"></i>Exercise</a>
                             </li>
                             <li id="share" class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -85,7 +85,8 @@
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="index.html"><i class="fas fa-sign-in-alt"></i>Sign
                                             In</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i>Sign Out</a>
+                                        <a class="dropdown-item" href="index.html"><i class="fas fa-sign-out-alt"></i>Sign
+                                            Out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -95,15 +96,14 @@
             </header>
         </section>
 
-
         <main class="main-section">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="card calorie-view">
                             <div class="card-body">
-                                <div class="card-text">
-                                    <table class="table table-borderless table-hover text-center mb-0">
+                                
+                                    <table class="table table-borderless table-hover text-center table-responsive mb-0">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Suggested Daily Calories</th>
@@ -127,7 +127,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -135,9 +135,9 @@
 
                 <div class="card progress-view mt-3">
                     <div class="card-header float-left">
-                        <div class="choose-progress form-group col-4 px-0">
+                        <div class="choose-progress form-group">
                             <label for="progressView"><b>Progress View</b></label>
-                            <select id="progressView" class="form-control">
+                            <select id="progressView" class="form-control col-md-4">
                                 <option selected>Choose...</option>
                                 <option>Today</option>
                                 <option>This Week</option>
@@ -159,53 +159,63 @@
                     <div class="card-header">
                         <b>Schedule Reminders</b>
                     </div>
+
                     <div class="card-body">
-
-                        <div class="choose-reminder form-group col-3 px-0">
-                            <label for="reminderView">Reminder</label>
-                            <select id="reminderView" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>Text</option>
-                                <option>Email</option>
-                            </select>
+                        <div class="form-row">
+                            <div class="choose-reminder form-group col-md-4">
+                                <label for="reminderView">Reminder</label>
+                                <select id="reminderView" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>Text</option>
+                                    <option>Email</option>
+                                </select>
+                            </div>
+                            <div class="choose-schedule-for-what form-group col-md-4">
+                                <label for="forWhatView">For What</label>
+                                <select id="forWhatView" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>Nutrition</option>
+                                    <option>Exercise</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="choose-schedule-day form-group col-3 px-0">
-                            <label for="dayView">Day</label>
-                            <select id="dayView" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>Monday</option>
-                                <option>Tuesday</option>
-                                <option>Wednesday</option>
-                                <option>Thursday</option>
-                                <option>Friday</option>
-                                <option>Saturday</option>
-                                <option>Sunday</option>
-                            </select>
+                        <div class="form-row">
+                            <div class="choose-schedule-day form-group col-md-4">
+                                <label for="dayView">Day</label>
+                                <select id="dayView" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>Monday</option>
+                                    <option>Tuesday</option>
+                                    <option>Wednesday</option>
+                                    <option>Thursday</option>
+                                    <option>Friday</option>
+                                    <option>Saturday</option>
+                                    <option>Sunday</option>
+                                </select>
+                            </div>
+                            <div class="choose-schedule-time form-group col-md-4">
+                                <label for="timeView">Time (HH:mm)</label>
+                                <input type="text" class="form-control form-control" id="time" placeholder="12:00">
+                            </div>
+                            <div class="choose-schedule-freq form-group col-md-4">
+                                <label for="freqView">Frequency</label>
+                                <select id="freqView" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>Daily</option>
+                                    <option>Weekly</option>
+                                </select>
+                            </div>
+
                         </div>
 
-                        <div class="choose-schedule-time form-group col-3 px-0">
-                            <label for="timeView">Time (HH:mm)</label>
-                            <input type="text" class="form-control form-control" id="time" placeholder="12:00">
-                        </div>
 
-                        <div class="choose-schedule-freq form-group col-3 px-0">
-                            <label for="freqView">Frequency</label>
-                            <select id="freqView" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>Daily</option>
-                                <option>Weekly</option>
-                            </select>
-                        </div>
 
-                        <div class="choose-schedule-for-what form-group col-3 px-0">
-                            <label for="forWhatView">For What</label>
-                            <select id="forWhatView" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>Nutrition</option>
-                                <option>Exercise</option>
-                            </select>
-                        </div>
+
+
+
+
+
 
                         <button class="btn btn-secondary" type="button" id="time-btn">Save</button>
 

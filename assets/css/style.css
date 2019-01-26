@@ -74,7 +74,7 @@ i {
 
 .login-redirects {
     border-top: 1px solid rgba(0,0,0,.125);
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .login-redirects > div {
@@ -110,8 +110,12 @@ a.redirect:active {
     text-decoration: none;
 }
 
-.calorie-view, .progress-view, .schedule-view {
+.calorie-view, .progress-view, .schedule-view, .nutrition-view, .user-profile, .exercise-view {
     margin-top: 6rem;
+    background: rgba(255, 255, 255,0.9);
+}
+
+.man-nutrition-view, .man-exercise-view {
     background: rgba(255, 255, 255,0.9);
 }
 
@@ -120,9 +124,16 @@ a.redirect:active {
 }
 
 img {
-    margin-top: 5rem;
     border-radius: 50%;
     height: 15rem;
+}
+
+.upc-btn {
+    font-family: 'Libre Barcode 39 Extended', cursive;
+}
+
+.user-nutr-add {
+    margin-bottom: 0;
 }
 
 .sticky-footer {
