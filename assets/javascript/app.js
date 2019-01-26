@@ -56,6 +56,8 @@ $("#sign-up-btn").on("click", function(event){
 
 $("#login-btn").on("click", function(event){
 
+    console.log("Log In Button Clicked");
+
     event.preventDefault();
 
     var email = $("#email-login").val().trim();
@@ -66,7 +68,7 @@ $("#login-btn").on("click", function(event){
         var errorMessage = error.message;
 
         console.log(errorCode);
-        console.log(errorCode);
+        console.log(errorMessage);
         
     });
 
@@ -79,6 +81,6 @@ $("#login-btn").on("click", function(event){
         }
     });
 
-    window.location.href = "index.html";
+    window.location.href = "dashboard.html";
 });
 
