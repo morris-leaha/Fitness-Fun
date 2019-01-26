@@ -16,7 +16,8 @@ var dataRef = firebase.database();
 //Form Validation
 var validateNutritionForm = function(nutrition){
 
-  if(!nutrition.food || 
+  if(!nutrition.classification ||
+     !nutrition.food || 
      !nutrition.serving || 
      !nutrition.calories || 
      !nutrition.fat || 
@@ -42,6 +43,7 @@ $("#add-nutrion-btn").on("click", function(event){
   event.preventDefault();
 
   //get nutrion input data
+  var classification = "nutrition";
   var food = $("#food-input").val().trim();
   var serving = $("#serving-input").val().trim();
   var calories = $("#cal-input").val().trim();
@@ -57,6 +59,7 @@ $("#add-nutrion-btn").on("click", function(event){
 
 
   console.log(food);
+  console.log(classification);
   console.log(serving);
   console.log(calories);
   console.log(fat);
@@ -68,6 +71,7 @@ $("#add-nutrion-btn").on("click", function(event){
 
   //Creates local "temporary" object for holding train data
   var NutritionFact ={
+    classification: classification,
     food: food,
     serving: serving,
     fat:fat,
@@ -100,17 +104,19 @@ dataRef.ref().on("child_added", function(childSnapshot) {
   var carbsdb = childSnapshot.val().carbs;
   var proteindb = childSnapshot.val().protein;
   //var mealdb = childSnapshot.val().meal;
-
+  console.log(childSnapshot.classification);
   // Create the new row
-  var nutritionRow = $("<tr>").append(
-    $("<td>").text(fooddb),
-    $("<td>").text(servingdb),
-    $("<td>").text(caloriesdb),
-    $("<td>").text(fatdb),
-    $("<td>").text(carbsdb),
-    $("<td>").text(proteindb),
-  );
+  if(childSnapshot.val().classification === "nutrition"){
+    var nutritionRow = $("<tr>").append(
+      $("<td>").text(fooddb),
+      $("<td>").text(servingdb),
+      $("<td>").text(caloriesdb),
+      $("<td>").text(fatdb),
+      $("<td>").text(carbsdb),
+      $("<td>").text(proteindb),
+    );
 
-// Append the new row to the table
-  $("#nutrition-table > tbody").append(nutritionRow);
+    // Append the new row to the table
+    $("#nutrition-table > tbody").append(nutritionRow);
+  }
 });
