@@ -69,8 +69,9 @@
       var fatdb = childSnapshot.val().fat;
       var carbsdb = childSnapshot.val().carbs;
       var proteindb = childSnapshot.val().protein;
-      //var mealdb = childSnapshot.val().meal;
-  
+      var mealdb = childSnapshot.val().meal;
+      var mealoutput =$("#meal-output").val().trim()
+  if(mealdb = mealoutput){
       // Create the new row
     var nutrionRow = $("<tr>").append(
       $("<td>").text(fooddb),
@@ -80,7 +81,16 @@
       $("<td>").text(carbsdb),
       $("<td>").text(proteindb),
       
-    );
+    );}
+    else{
+        var nutrionRow = $("<tr>").append(
+            $("<td>").text(fooddb),
+            $("<td>").text(servingdb),
+            $("<td>").text(caloriesdb),
+            $("<td>").text(fatdb),
+            $("<td>").text(carbsdb),
+            $("<td>").text(proteindb),
+        );}
     
    // Append the new row to the table
    $("#nutrition-table > tbody").append(nutrionRow);
