@@ -26,9 +26,7 @@
 
 <body>
 
-    <!-- Employee Tracker -->
-
-    <div class="container" id="main-container">
+    <div class="container-fluid" id="main-container">
         <section class="header">
             <header>
                 <!-- NAVBAR BRAND -->
@@ -98,78 +96,106 @@
             </header>
         </section>
 
+        <main class="main-section">
+            <div class="container" id="main-container">
+                <!-- USER EXERCISE TABLE -->
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <div class="card exercise-view mb-4">
+                            <div class="card-header">
+                                <span class="align-middle"><b>Exercise</b></span>
 
-        <div class="container" id="main-container">
-
-
-            <main class="main-section" style="padding:10px; margin-top: 30px">
-
-
-                <div class="row" class="row justify-content-center">
-
-                    <div class="col-md-12">
-                        <div class="card mb-4">
-
-
+                                <div class="input-group d-inline-flex float-right col-md-5 px-0 mt-2">
+                                    <input type="search" class="form-control" id="search-input" placeholder="Search..."
+                                        aria-label="Exercise Search" aria-describedby="search-submit">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="search-submit">Search</button>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card-body">
-
-                                <table class="table table-sm table-hover" id='workout-table'>
+                                <table class="table table-sm table-hover" id="exercise-table">
                                     <thead>
-                                        <tr>
+                                        <tr class="text-center">
                                             <th scope="col">Exercise</th>
                                             <th scope="col">Duration</th>
-                                            <th scope="col">Calories Burn</th>
-                                            <th scope="col">Sample Video</th>
+                                            <th scope="col">Calories Burned</th>
+                                            <th scope="col">Video</th>
+                                        </tr>
+
+                                        <tr>
+                                            <td scope="row" id="exercise-name"></td>
+                                            <td scope="row" id="exercise-duration"></td>
+                                            <td scope="row" id="exercise-cals-burned"></td>
+                                            <td scope="row" id="exercise-video"></td>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <td scope="col">
-                                            <input id="exercise-input" placeholder="" type="text">
-                                        </td>
-                                        <td scope="col">
-                                            <input id="duration-input" placeholder="" type="text">
-                                        </td>
-                                        <td scope="col">
-                                            <input id="calories-input" placeholder="" type="text">
-                                        </td>
-                                        <td scope="col">
-                                            <input id="Video-input" placeholder="" type="text">
-                                        </td>
+
+
                                     </tbody>
                                 </table>
-                                <button class="btn btn-secondary add-exercise">Add</button>
-                                <button class="btn btn-secondary delete-exercise">Delete</button>
                             </div>
                         </div>
                     </div>
                 </div>
-        </div>
 
-        </form>
-        </main>
-        <div class="col-lg-6">
-            <div class="card card-default">
-                <div class="card-header">Workout Info</div>
-                <table class="card-body" id="recent-member">
-                    <tr>
-                        <th>Exercise</th>
-                        <th>Duration</th>
-                        <th>Calories Burn</th>
-                    </tr>
-                    <tr>
-                        
-                        <td id="exercise-display"></td>
-                        <td id="duration-display"></td>                       
-                        <td id="calories-display"></td>
-                        <td id="video-display"></td>
-                    </tr>
-                
-                </table>
+                <!-- USER MANUAL ADD EXERCISE TABLE -->
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <div class="card man-exercise-view mb-4">
+                            <div class="card-header">
+                                <b>Add Nutrition Manually</b>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-sm user-exercise-add align-middle" id="man-exercise-table">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th scope="col">Exercise</th>
+                                            <th scope="col">Duration (mins)</th>
+                                            <th scope="col">Calories Burned</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td scope="row" class="exercise-name">
+                                                <div class="form-group">
+                                                    <input class="form-control col-auto" id="exercise-name-input"
+                                                        placeholder="Push-Ups" type="text">
+                                                </div>
+                                            </td>
+                                            <td scope="row" class="exercise-duration">
+                                                <div class="form-group">
+                                                    <input class="form-control" id="exercise-duration-input"
+                                                        placeholder="10" type="text">
+                                                </div>
+                                            </td>
+                                            <td scope="row" class="exercise-cals-burned">
+                                                <div class="form-group">
+                                                    <input class="form-control" id="exercise-cals-burned-input"
+                                                        placeholder="30" type="text">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <button class="btn btn-secondary add-exercise">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </main>
     </div>
 
 
+    <footer class="sticky-footer">
+        <div class="container text-center">
+            <span class="">Copyright &copy; 2018</span>
+        </div>
+    </footer>
 
     <!-- LINK TO JQUERY -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -185,6 +211,7 @@
     <!-- LINK TO JAVASCRIPT -->
     <!-- <script type="text/javascript" src="assets/javascript/app.js"></script> -->
     <script type="text/javascript" src="assets/javascript/exercise.js"></script>
+
 </body>
 
 </html>

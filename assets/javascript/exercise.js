@@ -1,13 +1,13 @@
-var config = {
-    apiKey: "AIzaSyDwS4xQfgKS5DAseUeQ7umkQOO3SaJGhbU",
-    authDomain: "fitness-tracker-bce35.firebaseapp.com",
-    databaseURL: "https://fitness-tracker-bce35.firebaseio.com",
-    projectId: "fitness-tracker-bce35",
-    storageBucket: "fitness-tracker-bce35.appspot.com",
-    messagingSenderId: "725491096361"
-};
-
-firebase.initializeApp(config);
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCfTB-G-lr6L_FFFdS3x-0sKwmVUUZhaBI",
+    authDomain: "nutrition-70662.firebaseapp.com",
+    databaseURL: "https://nutrition-70662.firebaseio.com",
+    projectId: "nutrition-70662",
+    storageBucket: "nutrition-70662.appspot.com",
+    messagingSenderId: "602412115127"
+  };
+  firebase.initializeApp(config);
 
 database = firebase.database();
 
@@ -15,14 +15,15 @@ var exercise = "";
 var duration = "";
 var burnCalorie = "";
 var sampleVideo = "";
+console.log(exercise);
 
 $(".add-exercise").on("click", function (event) {
     event.preventDefault();
 
-    exercise = $("#exercise-input").val().trim();
-    duration = $("#duration-input").val().trim();
-    burnCalorie = $("#calories-input").val().trim();
-    sampleVideo = $("#Video-input").val().trim();
+    exercise = $("#exercise-name-input").val().trim();
+    duration = $("#exercise-duration-input").val().trim();
+    burnCalorie = $("#exercise-cals-burned-input").val().trim();
+    //sampleVideo = $("#Video-input").val().trim();
 
     database.ref().set({
         exercise: exercise,
@@ -35,10 +36,10 @@ $(".add-exercise").on("click", function (event) {
 database.ref().on("value", function (record) {
 
 
-    $("#exercise-display").text(record.val().exercise);
-    $("#duration-display").text(record.val().duration);
-    $("#calories-display").text(record.val().burnCalorie);
-    $("#video-display").text(record.val().sampleVideo);
+    $("#exercise-name").text(record.val().exercise);
+    $("#exercise-duration").text(record.val().duration);
+    $("#exercise-cals-burned").text(record.val().burnCalorie);
+    //$("#exercise-video").text(record.val().sampleVideo);
 
     console.log(record);
 
