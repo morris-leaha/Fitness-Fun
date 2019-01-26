@@ -1,3 +1,4 @@
+
 //Nutritionix API: 68bd18dff81e4268ce3dd68b02a4f509
 
 // Initialize Firebase
@@ -108,6 +109,7 @@ dataRef.ref().on("child_added", function(childSnapshot) {
   // Create the new row
   if(childSnapshot.val().classification === "nutrition"){
     var nutritionRow = $("<tr>").append(
+
       $("<td>").text(fooddb),
       $("<td>").text(servingdb),
       $("<td>").text(caloriesdb),
