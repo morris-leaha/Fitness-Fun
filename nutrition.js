@@ -48,7 +48,7 @@
         meal:meal
         //currentTime:currentTime
     };//dataRef.ref('test1').child(meal).child(food).push(NutritionFact) 
-      dataRef.ref('test2').push(NutritionFact) 
+      dataRef.ref('test1').push(NutritionFact) 
   
   $("#food-input").val("");
     $("#serving-input").val("");
@@ -61,7 +61,7 @@
   //var mealoutput =($("#meal-output").val().trim()).toString;
 
     //. Create Firebase event for adding nutrion to a row in the html when a user adds an entry
-    dataRef.ref('test2').on("child_added", function(childSnapshot) {
+    dataRef.ref('test1').on("child_added", function(childSnapshot) {
       console.log(childSnapshot.val());
   
       var fooddb = childSnapshot.val().food;
