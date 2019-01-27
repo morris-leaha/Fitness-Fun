@@ -47,8 +47,8 @@
         protein:protein,
         meal:meal
         //currentTime:currentTime
-    };
-      dataRef.ref().push(NutritionFact) 
+    };//dataRef.ref('test1').child(meal).child(food).push(NutritionFact) 
+      dataRef.ref('test2').push(NutritionFact) 
   
   $("#food-input").val("");
     $("#serving-input").val("");
@@ -58,9 +58,10 @@
     $("#protein-input").val("");
   
   });
-  
-   //. Create Firebase event for adding nutrion to a row in the html when a user adds an entry
-    dataRef.ref().on("child_added", function(childSnapshot) {
+  //var mealoutput =($("#meal-output").val().trim()).toString;
+
+    //. Create Firebase event for adding nutrion to a row in the html when a user adds an entry
+    dataRef.ref('test2').on("child_added", function(childSnapshot) {
       console.log(childSnapshot.val());
   
       var fooddb = childSnapshot.val().food;
@@ -71,7 +72,6 @@
       var proteindb = childSnapshot.val().protein;
       var mealdb = childSnapshot.val().meal;
       var mealoutput =$("#meal-output").val().trim()
-  if(mealdb = mealoutput){
       // Create the new row
     var nutrionRow = $("<tr>").append(
       $("<td>").text(fooddb),
@@ -81,17 +81,7 @@
       $("<td>").text(carbsdb),
       $("<td>").text(proteindb),
       
-    );}
-    else{
-        var nutrionRow = $("<tr>").append(
-            $("<td>").text(fooddb),
-            $("<td>").text(servingdb),
-            $("<td>").text(caloriesdb),
-            $("<td>").text(fatdb),
-            $("<td>").text(carbsdb),
-            $("<td>").text(proteindb),
-        );}
-    
+    )
    // Append the new row to the table
    $("#nutrition-table > tbody").append(nutrionRow);
   });
