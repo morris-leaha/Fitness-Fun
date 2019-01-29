@@ -105,7 +105,7 @@ dataRef.ref().on("child_added", function(childSnapshot) {
   var carbsdb = childSnapshot.val().carbs;
   var proteindb = childSnapshot.val().protein;
   //var mealdb = childSnapshot.val().meal;
-  console.log(childSnapshot.classification);
+  //console.log(childSnapshot.classification);
   // Create the new row
   if(childSnapshot.val().classification === "nutrition"){
     var nutritionRow = $("<tr>").append(
