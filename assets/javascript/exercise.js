@@ -1,50 +1,58 @@
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCfTB-G-lr6L_FFFdS3x-0sKwmVUUZhaBI",
-    authDomain: "nutrition-70662.firebaseapp.com",
-    databaseURL: "https://nutrition-70662.firebaseio.com",
-    projectId: "nutrition-70662",
-    storageBucket: "nutrition-70662.appspot.com",
-    messagingSenderId: "602412115127"
-  };
-  firebase.initializeApp(config);
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCLBbtHm6JZPr2nfF14PQ-NrOKtpg-oQu0",
+    authDomain: "exercise-e5e02.firebaseapp.com",
+    databaseURL: "https://exercise-e5e02.firebaseio.com",
+    projectId: "exercise-e5e02",
+    storageBucket: "",
+    messagingSenderId: "1089651556569"
+};
+firebase.initializeApp(config);
 
-database = firebase.database();
+var dataRef = firebase.database();
 
-var exercise = "";
-var duration = "";
-var burnCalorie = "";
-var sampleVideo = "";
-console.log(exercise);
+
 
 $(".add-exercise").on("click", function (event) {
     event.preventDefault();
 
-    exercise = $("#exercise-name-input").val().trim();
-    duration = $("#exercise-duration-input").val().trim();
-    burnCalorie = $("#exercise-cals-burned-input").val().trim();
-    //sampleVideo = $("#Video-input").val().trim();
-
-    database.ref().set({
+    var exercise = $("#exercise-name-input").val().trim();
+    var duration = $("#exercise-duration-input").val().trim();
+    var burnCalorie = $("#exercise-cals-burned-input").val().trim();
+  
+    var exerciseData = {
         exercise: exercise,
         duration: duration,
-        burnCalorie: burnCalorie,
-        sampleVideo: sampleVideo
-    });
+        burnCalorie: burnCalorie
+    };
+
+    dataRef.ref().push(exerciseData)
+
+    $("#exercise-name-input").val("");
+    $("#exercise-duration-input").val("");
+    $("#exercise-cals-burned-input").val("");
 });
 
-database.ref().on("value", function (record) {
+ 
+dataRef.ref().on('child_added', function (snapshot) {
+
+    var exerciseData = snapshot.val().exercise;
+    var durationData = snapshot.val().duration;
+    var burnCalorieData = snapshot.val().burnCalorie;
+
+    var exerciseRow = $("<tr class='tr-center'>").append(
+        $("<td>").text(exerciseData),
+        $("<td>").text(durationData),
+        $("<td>").text(burnCalorieData),
+    );
+
+    $("#exercise-table > tbody").append(exerciseRow);
+
+});
+
+$("#search-submit").on("click", function () {
+    
+});
 
 
-    $("#exercise-name").text(record.val().exercise);
-    $("#exercise-duration").text(record.val().duration);
-    $("#exercise-cals-burned").text(record.val().burnCalorie);
-    //$("#exercise-video").text(record.val().sampleVideo);
 
-    console.log(record);
-
-}, function(errorObject) {
-    console.log("Errors handled: " + errorObject.code);
-})
-
-console.log("hey");
