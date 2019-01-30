@@ -104,8 +104,8 @@ dataRef.ref().on("child_added", function(childSnapshot) {
   var fatdb = childSnapshot.val().fat;
   var carbsdb = childSnapshot.val().carbs;
   var proteindb = childSnapshot.val().protein;
-  //var mealdb = childSnapshot.val().meal;
-  //console.log(childSnapshot.classification);
+
+
   // Create the new row
   if(childSnapshot.val().classification === "nutrition"){
     var nutritionRow = $("<tr>").append(
@@ -121,4 +121,90 @@ dataRef.ref().on("child_added", function(childSnapshot) {
     // Append the new row to the table
     $("#nutrition-table > tbody").append(nutritionRow);
   }
+
+  if(childSnapshot.val().classification === "nutrition" && childSnapshot.val().meal === "breakfast"){
+    var nutritionRow = $("<tr>").append(
+
+      $("<td>").text(fooddb),
+      $("<td>").text(servingdb),
+      $("<td>").text(caloriesdb),
+      $("<td>").text(fatdb),
+      $("<td>").text(carbsdb),
+      $("<td>").text(proteindb),
+    );
+
+    // Append the new row to the table
+    $("#breakfast-table > tbody").append(nutritionRow);
+  }
+
+  if(childSnapshot.val().classification === "nutrition" && childSnapshot.val().meal === "lunch"){
+    var nutritionRow = $("<tr>").append(
+
+      $("<td>").text(fooddb),
+      $("<td>").text(servingdb),
+      $("<td>").text(caloriesdb),
+      $("<td>").text(fatdb),
+      $("<td>").text(carbsdb),
+      $("<td>").text(proteindb),
+    );
+
+    // Append the new row to the table
+    $("#lunch-table > tbody").append(nutritionRow);
+  }
+
+  if(childSnapshot.val().classification === "nutrition" && childSnapshot.val().meal === "dinner"){
+    var nutritionRow = $("<tr>").append(
+
+      $("<td>").text(fooddb),
+      $("<td>").text(servingdb),
+      $("<td>").text(caloriesdb),
+      $("<td>").text(fatdb),
+      $("<td>").text(carbsdb),
+      $("<td>").text(proteindb),
+    );
+
+    // Append the new row to the table
+    $("#dinner-table > tbody").append(nutritionRow);
+  }
 });
+
+$("#meal-output").on("click", function(){
+
+  var selection = $(this).val().trim();
+  console.log(selection);
+
+  switch(selection) {
+
+    case "breakfast": 
+      $("#breakfast-table").show();
+      $("#nutrition-table").hide();
+      $("#lunch-table").hide();
+      $("#dinner-table").hide();
+      break;
+
+    case "lunch": 
+      $("#lunch-table").show();
+      $("#nutrition-table").hide();
+      $("#breakfast-table").hide();
+      $("#dinner-table").hide();
+      break;
+
+    case "dinner": 
+      $("#dinner-table").show();
+      $("#nutrition-table").hide();
+      $("#breakfast-table").hide();
+      $("#lunch-table").hide();
+      break;
+
+    default:
+    $("#nutrition-table").show();
+    $("#breakfast-table").hide();
+    $("#lunch-table").hide();
+    $("#dinner-table").hide();
+    break;
+  }
+});
+
+$("#breakfast-table").hide();
+$("#lunch-table").hide();
+$("#dinner-table").hide();
