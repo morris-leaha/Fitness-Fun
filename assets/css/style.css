@@ -65,7 +65,7 @@ i {
 }
 
 .signup {
-    margin-top: 7rem;
+    margin-top: 12rem;
 }
 
 .login {
@@ -111,7 +111,7 @@ a.redirect:active {
 }
 
 .create-profile {
-    margin-top: 10rem;
+    margin-top: 5rem;
 }
 
 .calorie-view, .progress-view, .schedule-view, .nutrition-view, .user-profile, .exercise-view {
@@ -134,6 +134,10 @@ img {
 
 .user-nutr-add {
     margin-bottom: 0;
+}
+
+.user-name, .user-gender, .user-activity > td {
+    text-transform: capitalize;
 }
 
 .sticky-footer {

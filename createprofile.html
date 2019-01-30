@@ -98,7 +98,7 @@
 
         <main class="main-section">
             <div class="row justify-content-center">
-                <div class="col-md-4">
+                <div class="col-lg-5 col-md-6 col-sm-8">
                     <div class="create-profile card">
 
                         <!-- CREATE USER PROFILE -->
@@ -122,13 +122,27 @@
                                     </div>
                                 </div>
 
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-6">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" class="form-control form-control-sm" id="firstName">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" class="form-control form-control-sm" id="lastName">
+                                    </div>
+
+                                </div>
+
                                 <div class="form-group">
                                     <label for="user-age">Age (years)</label>
                                     <input type="text" class="form-control form-control-sm" id="user-age">
                                 </div>
 
                                 <div class="form-row">
-                                    
+
                                     <div class="form-group col-md-6">
                                         <label for="user-weight">Current Weight (lbs)</label>
                                         <input type="text" class="form-control form-control-sm" id="user-weight">
@@ -153,6 +167,16 @@
                                         <input type="text" class="form-control form-control-sm" id="user-height-inches">
                                     </div>
 
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="activityView">Activity Level</label>
+                                    <select id="activityView" class="form-control">
+                                        <option value="none" selected>Choose...</option>
+                                        <option value="light">Light</option>
+                                        <option value="average">Average</option>
+                                        <option value="heavy">Heavy</option>
+                                    </select>
                                 </div>
 
                                 <button type="submit" class="btn btn-secondary sign-up" id="createprofile">Submit</button>
@@ -184,7 +208,6 @@
     <!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <!-- LINK TO JAVASCRIPT -->
     <script src="createprofile.js"></script>
-    <script src="login.js"></script>
 
 </body>
 

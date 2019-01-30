@@ -73,10 +73,10 @@
                                 <li id="user-dropdown" class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-user-circle"></i>User
+                                        <i class="fas fa-user-circle"></i><span id="nav-username"></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                        <a class="dropdown-item" href="profile.html"><i class="fas fa-user-cog"></i>Profile</a>
+                                        <a class="dropdown-item" href="profile.html"><i class="fas fa-user-cog"></i>Profile<span class="sr-only">(current)</span></a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="signup.html"><i class="fas fa-user-plus"></i>Create
                                             New
@@ -119,40 +119,31 @@
                                 <tbody class="user-information">
                                     <tr class="user-name">
                                         <th scope="row">Name</th>
-                                        <td>User Name</td>
+                                        <td id="userName"></td>
                                     </tr>
                                     <tr class="user-gender">
                                         <th scope="row">Gender</th>
-                                        <td>Male</td>
+                                        <td id="userGender"></td>
                                     </tr>
                                     <tr class="user-age">
                                         <th scope="row">Age</th>
-                                        <td>26</td>
+                                        <td id="userAge"></td>
                                     </tr>
                                     <tr class="user-curr-weight">
                                         <th scope="row">Current Weight (lbs)</th>
-                                        <td>165</td>
+                                        <td id="userWeight"></td>
                                     </tr>
                                     <tr class="user-goal-weight">
                                         <th scope="row">Goal Weight (lbs)</th>
-                                        <td>160</td>
+                                        <td id="userGoalWeight"></td>
                                     </tr>
                                     <tr class="user-curr-height">
-                                        <th scope="row">Current Height (X'XX")</th>
-                                        <td>5'10"</td>
+                                        <th scope="row">Current Height</th>
+                                        <td id="userHeight"></td>
                                     </tr>
-                                    <tr>
+                                    <tr class="user-activity">
                                         <th scope="row">Activity Level</th>
-                                        <td>
-                                            <div class="choose-activity-level form-group col-auto px-0">
-                                                <select id="activityView" class="form-control">
-                                                    <option selected>Choose Activity Level...</option>
-                                                    <option>Light</option>
-                                                    <option>Average</option>
-                                                    <option>Heavy</option>
-                                                </select>
-                                            </div>
-                                        </td>
+                                        <td id="userActLevel"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -187,7 +178,7 @@
     <!-- LINK TO AJAX -->
     <!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <!-- LINK TO JAVASCRIPT -->
-    <script type="text/javascript" src="assets/javascript/app.js"></script>
+    <script type="text/javascript" src="profile.js"></script>
 </body>
 
 </html>

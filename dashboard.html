@@ -43,7 +43,7 @@
                     <div class="collapse navbar-collapse" id="navbar-links">
                         <ul class="navbar-nav mr-auto">
                             <li id="dashboard" class="nav-item">
-                                <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                                <a class="nav-link active" href="dashboard.html"><i class="fas fa-tachometer-alt"></i>Dashboard<span class="sr-only">(current)</span></a>
                             </li>
                             <li id="about" class="nav-item">
                                 <a class="nav-link" href="nutrition.html"><i class="fas fa-utensils"></i>Nutrition</a>
@@ -73,7 +73,7 @@
                                 <li id="user-dropdown" class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-user-circle"></i>User
+                                        <i class="fas fa-user-circle"></i><span id="nav-username"></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                                         <a class="dropdown-item" href="profile.html"><i class="fas fa-user-cog"></i>Profile</a>
@@ -116,13 +116,13 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td id="user-dailyCals">1500</td>
+                                            <td id="user-dailyCals"></td>
                                             <td id="operator">-</td>
-                                            <td id="user-nutrCals">0</td>
+                                            <td id="user-nutrCals"></td>
                                             <td id="operator">+</td>
-                                            <td id="user-exercCal">0</td>
+                                            <td id="user-exercCals"></td>
                                             <td id="operator">=</td>
-                                            <td id="user-remainCal">1500</td>
+                                            <td id="user-remainCal"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -233,7 +233,7 @@
     <!-- LINK TO AJAX -->
     <!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <!-- LINK TO JAVASCRIPT -->
-    <script type="text/javascript" src="assets/javascript/app.js"></script>
+    <script type="text/javascript" src="dashboard.js"></script>
 </body>
 
 </html>

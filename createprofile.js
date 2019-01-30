@@ -31,28 +31,39 @@ $("#createprofile").on("click", function (event) {
     }
   };
 
-  //get nutrition input data
+  //get user input data
+  var userfirstname = $("#firstName").val().trim();
+  var userlastname = $("#lastName").val().trim();
   var userage = $("#user-age").val().trim();
   var userweight = $("#user-weight").val().trim();
   var usergoalweight = $("#user-goal-weight").val().trim();
   var userheightfeet = $("#user-height-feet").val().trim();
   var userheightinches = $("#user-height-inches").val().trim();
+  var userActivityLevel = $("#activityView").val();
 
   var createprofile = {
+    firstName: userfirstname,
+    lastName: userlastname,
     gender: gender,
     userage: userage,
     userweight: userweight,
     usergoalweight: usergoalweight,
     userheightfeet: userheightfeet,
-    userheightinches: userheightinches
+    userheightinches: userheightinches,
+    useractivitylevel: userActivityLevel,
   };
 
   dataRef.ref().push(createprofile);
 
   // clearing input fields 
+  $("#firstName").val("");
+  $("#lastName").val("");
   $("#user-age").val("");
   $("#user-weight").val("");
   $("#user-goal-weight").val("");
   $("#user-height-feet").val("");
   $("#user-height-inches").val("");
+
+  // redirecting user to dashboard.html after 
+  window.location.href = "dashboard.html";
 });

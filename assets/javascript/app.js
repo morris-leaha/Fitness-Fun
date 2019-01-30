@@ -1,13 +1,13 @@
-var config = {
-    apiKey: "AIzaSyDwS4xQfgKS5DAseUeQ7umkQOO3SaJGhbU",
-    authDomain: "fitness-tracker-bce35.firebaseapp.com",
-    databaseURL: "https://fitness-tracker-bce35.firebaseio.com",
-    projectId: "fitness-tracker-bce35",
-    storageBucket: "fitness-tracker-bce35.appspot.com",
-    messagingSenderId: "725491096361"
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDgFgcmDm5gwBlUoc9cv6174w5gHjiPkU0",
+    authDomain: "fitness-fun-project-1.firebaseapp.com",
+    databaseURL: "https://fitness-fun-project-1.firebaseio.com",
+    projectId: "fitness-fun-project-1",
+    storageBucket: "fitness-fun-project-1.appspot.com",
+    messagingSenderId: "381935885658"
   };
-
-firebase.initializeApp(config);
+  firebase.initializeApp(config);
 
 var currentUser;
 
@@ -15,16 +15,16 @@ $("#sign-up-btn").on("click", function(event){
 
     event.preventDefault();
 
-    var email = $("#inputEmail4").val().trim();
+    var email = $("#inputEmail").val().trim();
     var firstName = $("#firstName").val().trim();
     var lastName = $("#lastName").val().trim();
-    var username = $("#userName").val().trim();
+    // var username = $("#userName").val().trim();
     var password = $("#password").val().trim();
     var confirmPass = $("#passwordConfirm").val().trim();
 
-    console.log(email, firstName, lastName, username, password, confirmPass);
+    console.log(email, firstName, lastName, password, confirmPass);
 
-    if(email && username && firstName && lastName && password && confirmPass && confirmPass === password){
+    if(email && firstName && lastName && password && confirmPass && confirmPass === password){
         
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
             var errorCode = error.code;
