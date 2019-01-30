@@ -1,4 +1,3 @@
-
 //Nutritionix API: 68bd18dff81e4268ce3dd68b02a4f509
 
 // Initialize Firebase

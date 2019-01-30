@@ -71,6 +71,11 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     var exercisenamedb = childSnapshot.val().exercisename;
 
 
+    var exerciseData = snapshot.val().exercise;
+    var durationData = snapshot.val().duration;
+    var burnCalorieData = snapshot.val().burnCalorie;
+
+
     // Create the new row
     if (childSnapshot.val().classification === "exercise") {
         var exerciseRow = $("<tr>").append(
