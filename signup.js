@@ -18,16 +18,16 @@ $("#sign-up-btn").on("click", function(event){
   
     // store input in variables
     
-    var firstName = $("#firstName").val().trim();
-    var lastName = $("#lastName").val().trim();
+    // var firstName = $("#firstName").val().trim();
+    // var lastName = $("#lastName").val().trim();
     var email = $("#inputEmail").val().trim();
     // var username = $("#userName").val().trim();
     var password = $("#password").val().trim();
   
     // Creates local "temporary" object for holding data
     var newUser = {
-      firstName: firstName,
-      lastName: lastName,
+      // firstName: firstName,
+      // lastName: lastName,
       email: email,
       password: password,
       dateAdded: firebase.database.ServerValue.TIMESTAMP
@@ -36,8 +36,8 @@ $("#sign-up-btn").on("click", function(event){
     dataRef.ref().push(newUser);
 
     // clear input fields
-    $("#firstName").val("");
-    $("#lastName").val("");
+    // $("#firstName").val("");
+    // $("#lastName").val("");
     $("#inputEmail").val("");
     $("#password").val("");
     $("#passwordConfirm").val("");

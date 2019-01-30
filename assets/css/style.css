@@ -65,7 +65,7 @@ i {
 }
 
 .signup {
-    margin-top: 9rem;
+    margin-top: 12rem;
 }
 
 .login {
@@ -136,7 +136,7 @@ img {
     margin-bottom: 0;
 }
 
-.user-gender, .user-activity > td {
+.user-name, .user-gender, .user-activity > td {
     text-transform: capitalize;
 }
 

@@ -32,6 +32,8 @@ $("#createprofile").on("click", function (event) {
   };
 
   //get user input data
+  var userfirstname = $("#firstName").val().trim();
+  var userlastname = $("#lastName").val().trim();
   var userage = $("#user-age").val().trim();
   var userweight = $("#user-weight").val().trim();
   var usergoalweight = $("#user-goal-weight").val().trim();
@@ -40,6 +42,8 @@ $("#createprofile").on("click", function (event) {
   var userActivityLevel = $("#activityView").val();
 
   var createprofile = {
+    firstName: userfirstname,
+    lastName: userlastname,
     gender: gender,
     userage: userage,
     userweight: userweight,
@@ -52,6 +56,8 @@ $("#createprofile").on("click", function (event) {
   dataRef.ref().push(createprofile);
 
   // clearing input fields 
+  $("#firstName").val("");
+  $("#lastName").val("");
   $("#user-age").val("");
   $("#user-weight").val("");
   $("#user-goal-weight").val("");
