@@ -15,9 +15,8 @@
     <!-- LINK TO FONT AWESOME -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
-    <!-- LINK TO FIREBASE APP -->
-    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
-
+    <!-- LINK TO FIREBASE DB -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
     <!-- LINKS TO FIREBASE AUTH AND FIREBASE DATABASE -->
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
@@ -102,39 +101,39 @@
                     <div class="col">
                         <div class="card calorie-view">
                             <div class="card-body">
-                                
-                                    <table class="table table-borderless table-hover text-center table-responsive mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Suggested Daily Calories</th>
-                                                <th scope="col"></th>
-                                                <th scope="col">Nutritional Calories</th>
-                                                <th scope="col"></th>
-                                                <th scope="col">Exercise (Burned) Calories</th>
-                                                <th scope="col"></th>
-                                                <th scope="col">Remaining Daily Calories</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td id="user-dailyCals">1500</td>
-                                                <td id="operator">-</td>
-                                                <td id="user-nutrCals">0</td>
-                                                <td id="operator">+</td>
-                                                <td id="user-exercCal">0</td>
-                                                <td id="operator">=</td>
-                                                <td id="user-remainCal">1500</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                
+
+                                <table class="table table-borderless table-hover text-center table-responsive mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Suggested Daily Calories</th>
+                                            <th scope="col"></th>
+                                            <th scope="col">Nutritional Calories</th>
+                                            <th scope="col"></th>
+                                            <th scope="col">Exercise (Burned) Calories</th>
+                                            <th scope="col"></th>
+                                            <th scope="col">Remaining Daily Calories</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="user-dailyCals">1500</td>
+                                            <td id="operator">-</td>
+                                            <td id="user-nutrCals">0</td>
+                                            <td id="operator">+</td>
+                                            <td id="user-exercCal">0</td>
+                                            <td id="operator">=</td>
+                                            <td id="user-remainCal">1500</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="card progress-view mt-3">
-                    <div class="card-header float-left">
+                    <div class="card-header">
                         <div class="choose-progress form-group">
                             <label for="progressView"><b>Progress View</b></label>
                             <select id="progressView" class="form-control col-md-4">
@@ -157,25 +156,24 @@
 
                 <div class="card schedule-view mt-3">
                     <div class="card-header">
-                        <b>Schedule Reminders</b>
+                        <div class="choose-schedule-for-what form-group">
+                            <label for="forWhatView"><b>Schedule Reminders</b></label>
+                            <select id="forWhatView" class="form-control col-md-4">
+                                <option selected>For what...</option>
+                                <option>Nutrition</option>
+                                <option>Exercise</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="card-body">
                         <div class="form-row">
                             <div class="choose-reminder form-group col-md-4">
-                                <label for="reminderView">Reminder</label>
+                                <label for="reminderView">Reminder Type</label>
                                 <select id="reminderView" class="form-control">
                                     <option selected>Choose...</option>
                                     <option>Text</option>
                                     <option>Email</option>
-                                </select>
-                            </div>
-                            <div class="choose-schedule-for-what form-group col-md-4">
-                                <label for="forWhatView">For What</label>
-                                <select id="forWhatView" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>Nutrition</option>
-                                    <option>Exercise</option>
                                 </select>
                             </div>
                         </div>
@@ -208,14 +206,6 @@
                             </div>
 
                         </div>
-
-
-
-
-
-
-
-
 
                         <button class="btn btn-secondary" type="button" id="time-btn">Save</button>
 

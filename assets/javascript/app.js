@@ -9,6 +9,7 @@ var config = {
 
 firebase.initializeApp(config);
 
+<<<<<<< HEAD
 var currentUser;
 
 $("#sign-up-btn").on("click", function(event){
@@ -83,4 +84,7 @@ $("#login-btn").on("click", function(event){
 
     window.location.href = "dashboard.html";
 });
+=======
+
+>>>>>>> 315b02f847f3ae37b04105ea4285e424f17cc1c8
 
