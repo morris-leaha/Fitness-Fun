@@ -1,50 +1,87 @@
+//Nutritionix API: 68bd18dff81e4268ce3dd68b02a4f509
+
 // Initialize Firebase
-  var config = {
+var config = {
     apiKey: "AIzaSyDgFgcmDm5gwBlUoc9cv6174w5gHjiPkU0",
     authDomain: "fitness-fun-project-1.firebaseapp.com",
     databaseURL: "https://fitness-fun-project-1.firebaseio.com",
     projectId: "fitness-fun-project-1",
     storageBucket: "fitness-fun-project-1.appspot.com",
     messagingSenderId: "381935885658"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 
-database = firebase.database();
+var dataRef = firebase.database();
 
-var exercise = "";
-var duration = "";
-var burnCalorie = "";
-var sampleVideo = "";
-console.log(exercise);
+//Form Validation
+var validateNutritionForm = function (exercise) {
 
-$(".add-exercise").on("click", function (event) {
+    if (!exercise.classification ||
+        !exercise.exercisename ||
+        !exercise.exerciseduration ||
+        !exercise.exercisecalsburned ||
+        !exercise.exercisecurrentTime
+    ) {
+        console.log("Form Failed");
+    } else {
+        dataRef.ref().push(exercise)
+        $("#exercise-name-input").val("");
+        $("#exercise-duration-input").val("");
+        $("#exercise-cals-burned-input").val("");
+    }
+}
+// adding exercise to table 
+$("#add-exercise-btn").on("click", function (event) {
     event.preventDefault();
 
-    exercise = $("#exercise-name-input").val().trim();
-    duration = $("#exercise-duration-input").val().trim();
-    burnCalorie = $("#exercise-cals-burned-input").val().trim();
-    //sampleVideo = $("#Video-input").val().trim();
+    // get input data
+    var classification = "exercise";
+    var exercisename = $("#exercise-name-input").val().trim();
+    var exerciseduration = $("#exercise-duration-input").val().trim();
+    var exercisecalsburned = $("#exercise-cals-burned-input").val().trim();
+    var exercisecurrentTime = moment().format("YYYY-MM-DD HH:mm Z");
 
-    database.ref().set({
-        exercise: exercise,
-        duration: duration,
-        burnCalorie: burnCalorie,
-        sampleVideo: sampleVideo
-    });
+    console.log(exercisename);
+    console.log(exerciseduration);
+    console.log(exercisecalsburned);
+    console.log(exercisecurrentTime);
+    //console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+    // Creates local "temporary" object for holding data
+    var exerciseInfo = {
+        classification: classification,
+        exercisename: exercisename,
+        exerciseduration: exerciseduration,
+        exercisecalsburned: exercisecalsburned,
+        exercisecurrentTime: exercisecurrentTime
+    };
+
+    validateNutritionForm(exerciseInfo);
+
+
 });
 
-database.ref().on("value", function (record) {
+// Create Firebase event for adding to a row in the html when a user adds an entry
+dataRef.ref().on("child_added", function (childSnapshot) {
+    //console.log(childSnapshot.val());
+    var userFirstName = childSnapshot.val().firstName;
+    $("#nav-username").text(userFirstName);
+    var exercisedurationdb = childSnapshot.val().exerciseduration;
+    var exercisecalsburneddb = childSnapshot.val().exercisecalsburned;
+    var exercisenamedb = childSnapshot.val().exercisename;
 
 
-    $("#exercise-name").text(record.val().exercise);
-    $("#exercise-duration").text(record.val().duration);
-    $("#exercise-cals-burned").text(record.val().burnCalorie);
-    //$("#exercise-video").text(record.val().sampleVideo);
+    // Create the new row
+    if (childSnapshot.val().classification === "exercise") {
+        var exerciseRow = $("<tr>").append(
 
-    console.log(record);
+            $("<td>").text(exercisenamedb),
+            $("<td>").text(exercisedurationdb),
+            $("<td>").text(exercisecalsburneddb),
+        );
 
-}, function(errorObject) {
-    console.log("Errors handled: " + errorObject.code);
-})
+        // Append the new row to the table
+        $("#exercise-table > tbody").append(exerciseRow);
+    }
 
-console.log("hey");
+});
