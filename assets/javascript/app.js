@@ -15,16 +15,16 @@ $("#sign-up-btn").on("click", function(event){
 
     event.preventDefault();
 
-    var email = $("#inputEmail4").val().trim();
+    var email = $("#inputEmail").val().trim();
     var firstName = $("#firstName").val().trim();
     var lastName = $("#lastName").val().trim();
-    var username = $("#userName").val().trim();
+    // var username = $("#userName").val().trim();
     var password = $("#password").val().trim();
     var confirmPass = $("#passwordConfirm").val().trim();
 
-    console.log(email, firstName, lastName, username, password, confirmPass);
+    console.log(email, firstName, lastName, password, confirmPass);
 
-    if(email && username && firstName && lastName && password && confirmPass && confirmPass === password){
+    if(email && firstName && lastName && password && confirmPass && confirmPass === password){
         
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
             var errorCode = error.code;

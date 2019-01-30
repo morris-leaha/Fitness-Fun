@@ -65,7 +65,7 @@ i {
 }
 
 .signup {
-    margin-top: 7rem;
+    margin-top: 9rem;
 }
 
 .login {
@@ -134,6 +134,10 @@ img {
 
 .user-nutr-add {
     margin-bottom: 0;
+}
+
+.user-gender, .user-activity > td {
+    text-transform: capitalize;
 }
 
 .sticky-footer {
