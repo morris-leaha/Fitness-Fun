@@ -16,27 +16,21 @@ dataRef.ref().on("child_added", function (childSnapshot) {
 
     // grabbing the values from FB DB and storing relavent info in variables
     var userGender = childSnapshot.val().gender;
-        console.log("user gender: " + userGender);
     var userAge = childSnapshot.val().userage;
-        console.log("user age: " + userAge);
     var userWeight = childSnapshot.val().userweight;
-        console.log("user weight: " + userWeight);
     var userGoalWeight = childSnapshot.val().usergoalweight;
-        console.log("user goal weight: " + userGoalWeight);
     var userHeightFeet = childSnapshot.val().userheightfeet;
-        console.log("user height (ft): " + userHeightFeet);
     var userHeightInches = childSnapshot.val().userheightinches;
-        console.log("user height (in): " + userHeightInches);
 
     // calculating user BMR, or user daily calories
     var convertedWeight = (userWeight / 2.205);
-        console.log("Weight in kgs: " + convertedWeight);
+    console.log("Weight in kgs: " + convertedWeight);
 
     var convertedHeightInches = ((userHeightFeet * 12) + parseInt(userHeightInches));
-        console.log("Height in inches: " + convertedHeightInches);
+    console.log("Height in inches: " + convertedHeightInches);
 
     var convertedHeightCentimeters = (convertedHeightInches * 2.54);
-        console.log("Height in cms: " + convertedHeightCentimeters);
+    console.log("Height in cms: " + convertedHeightCentimeters);
 
 
     if (userGender === "male") {
@@ -50,4 +44,16 @@ dataRef.ref().on("child_added", function (childSnapshot) {
         $("#user-dailyCals").text(femaleBMR);
     }
 
+
+    // need to pull total daily calories from FB & write to DOM:
+        // $("#user-nutrCals").text(whateverwecallthisvariable);
+        
+    // need to pull total daily calories burned from FB & write to DOM:
+        // $("user-exercCals").text(whateverwecallthisvariable);
+
+    // some functionality to change daily caloric intake based on goal weight? 
+    
+
+
 });
+
