@@ -25,6 +25,7 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     var userHeightInches = childSnapshot.val().userheightinches;
     var userActLevel = childSnapshot.val().useractivitylevel;
 
+    $("#nav-username").text(userFirstName);
     $("#userName").text(userFirstName + " " + userLastName);
     $("#userGender").text(userGender);
     $("#userAge").text(userAge);

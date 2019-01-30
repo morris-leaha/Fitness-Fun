@@ -15,6 +15,8 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val());
 
     // grabbing the values from FB DB and storing relavent info in variables
+    var userFirstName = childSnapshot.val().firstName;
+    $("#nav-username").text(userFirstName);
     var userGender = childSnapshot.val().gender;
     var userAge = childSnapshot.val().userage;
     var userWeight = childSnapshot.val().userweight;

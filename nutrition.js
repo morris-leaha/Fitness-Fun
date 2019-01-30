@@ -100,6 +100,8 @@ $("#add-nutrion-btn").on("click", function(event){
 dataRef.ref().on("child_added", function(childSnapshot) {
   //console.log(childSnapshot.val());
 
+  var userFirstName = childSnapshot.val().firstName;
+    $("#nav-username").text(userFirstName);
   var fooddb = childSnapshot.val().food;
   var servingdb = childSnapshot.val().serving;
   var caloriesdb = childSnapshot.val().calories;
