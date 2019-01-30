@@ -99,7 +99,7 @@
         <main class="main-section">
             <div class="row justify-content-center">
                 <div class="col-md-4">
-                    <div class="login card">
+                    <div class="create-profile card">
 
                         <!-- CREATE USER PROFILE -->
                         <div class="card-header text-center">Create Your Profile</div>
@@ -127,9 +127,18 @@
                                     <input type="text" class="form-control form-control-sm" id="user-age">
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="user-weight">Current Weight (lbs)</label>
-                                    <input type="text" class="form-control form-control-sm" id="user-weight">
+                                <div class="form-row">
+                                    
+                                    <div class="form-group col-md-6">
+                                        <label for="user-weight">Current Weight (lbs)</label>
+                                        <input type="text" class="form-control form-control-sm" id="user-weight">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="user-weight">Goal Weight (lbs)</label>
+                                        <input type="text" class="form-control form-control-sm" id="user-goal-weight">
+                                    </div>
+
                                 </div>
 
                                 <div class="form-row">
@@ -146,7 +155,7 @@
 
                                 </div>
 
-                                <button type="submit" class="btn btn-secondary sign-up" id="submit-profile">Submit</button>
+                                <button type="submit" class="btn btn-secondary sign-up" id="createprofile">Submit</button>
                             </form>
                         </div>
 
@@ -174,7 +183,9 @@
     <!-- LINK TO AJAX -->
     <!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <!-- LINK TO JAVASCRIPT -->
-    <script type="text/javascript" src="assets/javascript/caloriecal.js"></script>
+    <script src="createprofile.js"></script>
+    <script src="login.js"></script>
+
 </body>
 
 </html>
