@@ -31,12 +31,13 @@ $("#createprofile").on("click", function (event) {
     }
   };
 
-  //get nutrition input data
+  //get user input data
   var userage = $("#user-age").val().trim();
   var userweight = $("#user-weight").val().trim();
   var usergoalweight = $("#user-goal-weight").val().trim();
   var userheightfeet = $("#user-height-feet").val().trim();
   var userheightinches = $("#user-height-inches").val().trim();
+  var userActivityLevel = $("#activityView").val();
 
   var createprofile = {
     gender: gender,
@@ -44,7 +45,8 @@ $("#createprofile").on("click", function (event) {
     userweight: userweight,
     usergoalweight: usergoalweight,
     userheightfeet: userheightfeet,
-    userheightinches: userheightinches
+    userheightinches: userheightinches,
+    useractivitylevel: userActivityLevel,
   };
 
   dataRef.ref().push(createprofile);
