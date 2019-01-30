@@ -55,4 +55,7 @@ $("#createprofile").on("click", function (event) {
   $("#user-goal-weight").val("");
   $("#user-height-feet").val("");
   $("#user-height-inches").val("");
+
+  // redirecting user to dashboard.html after 
+  window.location.href = "dashboard.html";
 });

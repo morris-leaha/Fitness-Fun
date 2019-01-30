@@ -1,13 +1,13 @@
 //Nutritionix API: 68bd18dff81e4268ce3dd68b02a4f509
 
 // Initialize Firebase
-var config = {
-    apiKey: "AIzaSyCfTB-G-lr6L_FFFdS3x-0sKwmVUUZhaBI",
-    authDomain: "nutrition-70662.firebaseapp.com",
-    databaseURL: "https://nutrition-70662.firebaseio.com",
-    projectId: "nutrition-70662",
-    storageBucket: "nutrition-70662.appspot.com",
-    messagingSenderId: "602412115127"
+  var config = {
+    apiKey: "AIzaSyDgFgcmDm5gwBlUoc9cv6174w5gHjiPkU0",
+    authDomain: "fitness-fun-project-1.firebaseapp.com",
+    databaseURL: "https://fitness-fun-project-1.firebaseio.com",
+    projectId: "fitness-fun-project-1",
+    storageBucket: "fitness-fun-project-1.appspot.com",
+    messagingSenderId: "381935885658"
   };
   firebase.initializeApp(config);
   

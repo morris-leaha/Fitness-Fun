@@ -1,13 +1,13 @@
-var config = {
-    apiKey: "AIzaSyDwS4xQfgKS5DAseUeQ7umkQOO3SaJGhbU",
-    authDomain: "fitness-tracker-bce35.firebaseapp.com",
-    databaseURL: "https://fitness-tracker-bce35.firebaseio.com",
-    projectId: "fitness-tracker-bce35",
-    storageBucket: "fitness-tracker-bce35.appspot.com",
-    messagingSenderId: "725491096361"
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDgFgcmDm5gwBlUoc9cv6174w5gHjiPkU0",
+    authDomain: "fitness-fun-project-1.firebaseapp.com",
+    databaseURL: "https://fitness-fun-project-1.firebaseio.com",
+    projectId: "fitness-fun-project-1",
+    storageBucket: "fitness-fun-project-1.appspot.com",
+    messagingSenderId: "381935885658"
   };
-
-firebase.initializeApp(config);
+  firebase.initializeApp(config);
 
 var currentUser;
 

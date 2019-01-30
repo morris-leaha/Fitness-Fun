@@ -2,15 +2,15 @@
 //Nutritionix API: 68bd18dff81e4268ce3dd68b02a4f509
 
 // Initialize Firebase
-var config = {
-  apiKey: "AIzaSyCfTB-G-lr6L_FFFdS3x-0sKwmVUUZhaBI",
-  authDomain: "nutrition-70662.firebaseapp.com",
-  databaseURL: "https://nutrition-70662.firebaseio.com",
-  projectId: "nutrition-70662",
-  storageBucket: "nutrition-70662.appspot.com",
-  messagingSenderId: "602412115127"
-};
-firebase.initializeApp(config);
+  var config = {
+    apiKey: "AIzaSyDgFgcmDm5gwBlUoc9cv6174w5gHjiPkU0",
+    authDomain: "fitness-fun-project-1.firebaseapp.com",
+    databaseURL: "https://fitness-fun-project-1.firebaseio.com",
+    projectId: "fitness-fun-project-1",
+    storageBucket: "fitness-fun-project-1.appspot.com",
+    messagingSenderId: "381935885658"
+  };
+  firebase.initializeApp(config);
 
 var dataRef = firebase.database();
 
@@ -28,7 +28,9 @@ var validateNutritionForm = function(nutrition){
      !nutrition.currentTime) {
     console.log("Form Failed");
   } else {
-    dataRef.ref().push(nutrition)
+    dataRef.ref().push(nutrition);
+
+    // clearing input fields
     $("#food-input").val("");
     $("#serving-input").val("");
     $("#cal-input").val("");
@@ -38,12 +40,12 @@ var validateNutritionForm = function(nutrition){
   }
 }
 
-//button to nutrion data
+// button to nutrition data
 $("#add-nutrion-btn").on("click", function(event){
   
   event.preventDefault();
 
-  //get nutrion input data
+  // get nutrition input data
   var classification = "nutrition";
   var food = $("#food-input").val().trim();
   var serving = $("#serving-input").val().trim();
@@ -70,7 +72,7 @@ $("#add-nutrion-btn").on("click", function(event){
   console.log(currentTime);
   //console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
-  //Creates local "temporary" object for holding train data
+  // Creates local "temporary" object for holding data
   var NutritionFact ={
     classification: classification,
     food: food,
@@ -94,7 +96,7 @@ $("#add-nutrion-btn").on("click", function(event){
 
 });
   
-//. Create Firebase event for adding nutrion to a row in the html when a user adds an entry
+// Create Firebase event for adding nutrition to a row in the html when a user adds an entry
 dataRef.ref().on("child_added", function(childSnapshot) {
   //console.log(childSnapshot.val());
 
