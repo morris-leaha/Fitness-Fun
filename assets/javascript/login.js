@@ -17,18 +17,21 @@
   $("#login").on("click", function(event){
   
       
-      event.preventDefault();
+      // event.preventDefault();
     
-      //get nutrion input data
-      var username = $("#userName").val().trim();
-      var password = $("#password").val().trim();
-      var uniqueID = username+password;
-      console.log(uniqueID);
-      var loginInfo ={
-        username:username,
-        password: password
+      // //get nutrion input data
+      // var username = $("#userName").val().trim();
+      // var password = $("#password").val().trim();
+      // var uniqueID = username+password;
+      // console.log(uniqueID);
+      // var loginInfo ={
+      //   username:username,
+      //   password: password
         
-      };
+      // };
       
-      dataRef.ref(uniqueID).push(loginInfo)
+      // dataRef.ref(uniqueID).push(loginInfo);
+
+        // redirecting user to dashboard.html after 
+  window.location.href = "dashboard.html";
   })
