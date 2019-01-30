@@ -45,17 +45,12 @@ dataRef.ref().on("child_added", function (childSnapshot) {
         console.log("Female current BMR: " + femaleBMR);
         $("#user-dailyCals").text(femaleBMR);
     }
+});
 
-
-    // need to pull total daily calories from FB & write to DOM:
-        // $("#user-nutrCals").text(whateverwecallthisvariable);
-        
-    // need to pull total daily calories burned from FB & write to DOM:
-        // $("user-exercCals").text(whateverwecallthisvariable);
-
-    // some functionality to change daily caloric intake based on goal weight? 
-    
-
-
+dataRef.ref().on("value", function(snapshot){
+    snapshot.forEach(function(childSnapshot){
+        var childData = childSnapshot.val();
+        console.log(childData);
+    });
 });
 
