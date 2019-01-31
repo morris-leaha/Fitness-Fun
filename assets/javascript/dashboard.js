@@ -10,6 +10,19 @@ var config = {
 firebase.initializeApp(config);
 
 var dataRef = firebase.database();
+var uid;
+
+//Read cookie containing user data, only works if cookie contains one key-value pair
+var readCookie = function(){
+    
+    //Split key and value
+    if(document.cookies){
+        var cookieParts = document.cookie.split("=");
+        var uid = cookieParts[1].slice(0, -1);
+        return uid;
+    }
+    return null;
+}
 
 dataRef.ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val());
@@ -45,17 +58,20 @@ dataRef.ref().on("child_added", function (childSnapshot) {
         console.log("Female current BMR: " + femaleBMR);
         $("#user-dailyCals").text(femaleBMR);
     }
-
-
-    // need to pull total daily calories from FB & write to DOM:
-        // $("#user-nutrCals").text(whateverwecallthisvariable);
-        
-    // need to pull total daily calories burned from FB & write to DOM:
-        // $("user-exercCals").text(whateverwecallthisvariable);
-
-    // some functionality to change daily caloric intake based on goal weight? 
-    
-
-
 });
 
+dataRef.ref().on("value", function(snapshot){
+    snapshot.forEach(function(childSnapshot){
+        var childData = childSnapshot.val();
+
+        if(childData.classification === "exercise"){
+            console.log(childData);
+        }
+    });
+});
+
+//uid = readCookie();
+
+// if(!uid){
+//     window.location.href = "index.html";
+// }
