@@ -18,9 +18,6 @@ $("#sign-up-btn").on("click", function(event){
     event.preventDefault();
 
     var email = $("#inputEmail").val().trim();
-    //var firstName = $("#firstName").val().trim();
-    //var lastName = $("#lastName").val().trim();
-    // var username = $("#userName").val().trim();
     var password = $("#password").val().trim();
     var confirmPass = $("#passwordConfirm").val().trim();
 

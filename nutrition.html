@@ -50,7 +50,8 @@
                                 <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             </li>
                             <li id="about" class="nav-item">
-                                <a class="nav-link active" href="nutrition.html"><i class="fas fa-utensils"></i>Nutrition<span class="sr-only">(current)</span></a>
+                                <a class="nav-link active" href="nutrition.html"><i class="fas fa-utensils"></i>Nutrition<span
+                                        class="sr-only">(current)</span></a>
                             </li>
                             <li id="features" class="nav-item">
                                 <a class="nav-link" href="exercise.html"><i class="fas fa-running"></i>Exercise</a>
@@ -200,79 +201,86 @@
                     </div>
                 </div>
 
-                <!-- USER MANUAL ADD NUTRITION TABLE -->   
-                <form id="nutrition form" novalidate>
-                <div class="row justify-content-center">
-                    <div class="col">
-                        <div class="card man-nutrition-view mb-4">
-                            <div class="card-header">
-                                <div class="choose-meal-category form-group col-md-2 px-0">
-                                    <label for="mealView"><b>Add Nutrition Manually</b></label>
-                                    <select class="form-control" id="meal-input" type="text" name="Meal">
-                                        <option selected>Choose Meal...</option>
-                                        <option value="breakfast">Breakfast</option>
-                                        <option value="lunch">Lunch</option>
-                                        <option value="dinner">Dinner</option>
-                                    </select>
+                <!-- USER MANUAL ADD NUTRITION TABLE -->
+                <form id="nutrition-form needs-validation" novalidate>
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="card man-nutrition-view mb-4">
+                                <div class="card-header">
+                                    <div class="choose-meal-category form-group col-md-2 px-0">
+                                        <label for="mealView"><b>Add Nutrition Manually</b></label>
+                                        <select class="form-control" id="meal-input" type="text" name="Meal">
+                                            <option selected>Choose Meal...</option>
+                                            <option value="breakfast">Breakfast</option>
+                                            <option value="lunch">Lunch</option>
+                                            <option value="dinner">Dinner</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-sm user-nutr-add align-middle" id="man-nutrition-table">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th scope="col">Food</th>
-                                            <th scope="col">Serving</th>
-                                            <th scope="col">Cal</th>
-                                            <th scope="col">Fat (g)</th>
-                                            <th scope="col">Carbs (g)</th>
-                                            <th scope="col">Protein (g)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td scope="row" class="food-name">
-                                                <div class="form-group">
-                                                    <input class="form-control col-auto" id="food-input" placeholder="Chicken Salad"
-                                                        type="text">
-                                                </div>
-                                            </td>
-                                            <td scope="row" class="food-serving">
-                                                <div class="form-group">
-                                                    <input class="form-control" id="serving-input" placeholder="2" type="text">
-                                                </div>
-                                            </td>
-                                            <td scope="row" class="food-cal">
-                                                <div class="form-group">
-                                                    <input class="form-control" id="cal-input" placeholder="30" type="text">
-                                                </div>
-                                            </td>
-                                            <td scope="row" class="food-fat">
-                                                <div class="form-group">
-                                                    <input class="form-control" id="fat-input" placeholder="40" type="text">
-                                                </div>
-                                            </td>
-                                            <td scope="row" class="food-carbs">
-                                                <div class="form-group">
-                                                    <input class="form-control" id="carbs-input" placeholder="13" type="text">
-                                                </div>
-                                            </td>
-                                            <td scope="row" class="food-protein">
-                                                <div class="form-group">
-                                                    <input class="form-control" id="protein-input" placeholder="60"
-                                                        type="text" required>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="card-body">
+                                    <table class="table table-sm user-nutr-add align-middle" id="man-nutrition-table">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th scope="col">Food</th>
+                                                <th scope="col">Serving</th>
+                                                <th scope="col">Cal</th>
+                                                <th scope="col">Fat (g)</th>
+                                                <th scope="col">Carbs (g)</th>
+                                                <th scope="col">Protein (g)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td scope="row" class="food-name">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control col-auto" id="food-input"
+                                                            placeholder="Chicken Salad" required>
+                                                    </div>
+                                                </td>
+                                                <td scope="row" class="food-serving">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="serving-input"
+                                                            placeholder="2" required>
+                                                    </div>
+                                                </td>
+                                                <td scope="row" class="food-cal">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="cal-input"
+                                                            placeholder="30" required>
+                                                    </div>
+                                                </td>
+                                                <td scope="row" class="food-fat">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="fat-input"
+                                                            placeholder="40" required>
+                                                    </div>
+                                                </td>
+                                                <td scope="row" class="food-carbs">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="carbs-input"
+                                                            placeholder="13">
+                                                    </div>
+                                                </td>
+                                                <td scope="row" class="food-protein">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="protein-input"
+                                                            placeholder="60" required>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
-                                <button class="btn btn-secondary add-nutrition" id="add-nutrion-btn" type="submit">Add</button>
+                                    <p id="validation-text">Please check your input!</p>
+
+                                    <button class="btn btn-secondary add-nutrition" id="add-nutrition-btn" type="submit">Add</button>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
-            
+                </form>
+
         </main>
     </div>
 
