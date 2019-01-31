@@ -50,7 +50,7 @@ $("#sign-up-btn").on("click", function(event){
             }
           });
 
-        //window.location.href = "createprofile.html";
+        window.location.href = "createprofile.html";
         
 
     } else {
