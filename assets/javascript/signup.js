@@ -18,15 +18,15 @@ $("#sign-up-btn").on("click", function(event){
     event.preventDefault();
 
     var email = $("#inputEmail").val().trim();
-    var firstName = $("#firstName").val().trim();
-    var lastName = $("#lastName").val().trim();
+    //var firstName = $("#firstName").val().trim();
+    //var lastName = $("#lastName").val().trim();
     // var username = $("#userName").val().trim();
     var password = $("#password").val().trim();
     var confirmPass = $("#passwordConfirm").val().trim();
 
-    console.log(email, firstName, lastName, password, confirmPass);
+    console.log(email, password, confirmPass);
 
-    if(email && firstName && lastName && password && confirmPass && confirmPass === password){
+    if(email && password && confirmPass && confirmPass === password){
         
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
             var errorCode = error.code;
@@ -41,12 +41,16 @@ $("#sign-up-btn").on("click", function(event){
             if (user) {
               currentUser = user;
               console.log(user);
+              uid = user.uid;
+              console.log(uid);
+              document.cookie = "uid=" + uid  + ";";
+              console.log(document.cookie)
             } else {
               console.log("Log In Failed");
             }
           });
 
-        window.location.href = "createprofile.html";
+        //window.location.href = "createprofile.html";
         
 
     } else {

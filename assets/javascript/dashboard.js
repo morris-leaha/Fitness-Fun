@@ -10,6 +10,19 @@ var config = {
 firebase.initializeApp(config);
 
 var dataRef = firebase.database();
+var uid;
+
+//Read cookie containing user data, only works if cookie contains one key-value pair
+var readCookie = function(){
+    
+    //Split key and value
+    if(document.cookies){
+        var cookieParts = document.cookie.split("=");
+        var uid = cookieParts[1].slice(0, -1);
+        return uid;
+    }
+    return null;
+}
 
 dataRef.ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val());
@@ -50,7 +63,15 @@ dataRef.ref().on("child_added", function (childSnapshot) {
 dataRef.ref().on("value", function(snapshot){
     snapshot.forEach(function(childSnapshot){
         var childData = childSnapshot.val();
-        console.log(childData);
+
+        if(childData.classification === "exercise"){
+            console.log(childData);
+        }
     });
 });
 
+//uid = readCookie();
+
+// if(!uid){
+//     window.location.href = "index.html";
+// }
