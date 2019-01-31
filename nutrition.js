@@ -1,5 +1,23 @@
 //Nutritionix API: 68bd18dff81e4268ce3dd68b02a4f509
 
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
 // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDgFgcmDm5gwBlUoc9cv6174w5gHjiPkU0",
@@ -24,12 +42,16 @@ var validateNutritionForm = function(nutrition){
      !nutrition.carbs || 
      !nutrition.protein || 
      !nutrition.meal || 
-     !nutrition.currentTime) {
-    console.log("Form Failed");
+     !nutrition.currentTime || 
+     isNaN(nutrition.serving) ||
+     isNaN(nutrition.calories) ||
+     isNaN(nutrition.fat) ||
+     isNaN(nutrition.carbs) ||
+     isNaN(nutrition.protein)) {
+    $("#validation-text").show();
+    console.log("Form Failed"); // add modal or look into (jQuery.after) to tell user input is incorrect 
   } else {
-    dataRef.ref().push(nutrition);
-
-    // clearing input fields
+    dataRef.ref().push(nutrition)
     $("#food-input").val("");
     $("#serving-input").val("");
     $("#cal-input").val("");
@@ -39,12 +61,14 @@ var validateNutritionForm = function(nutrition){
   }
 }
 
-// button to nutrition data
-$("#add-nutrion-btn").on("click", function(event){
+//button to nutrition data
+$("#add-nutrition-btn").on("click", function(event){
   
   event.preventDefault();
 
-  // get nutrition input data
+  $("#validation-text").hide();
+
+  //get nutrion input data
   var classification = "nutrition";
   var food = $("#food-input").val().trim();
   var serving = $("#serving-input").val().trim();
@@ -71,7 +95,7 @@ $("#add-nutrion-btn").on("click", function(event){
   console.log(currentTime);
   //console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
-  // Creates local "temporary" object for holding data
+  //Creates local "temporary" object for holding train data
   var NutritionFact ={
     classification: classification,
     food: food,
@@ -95,12 +119,10 @@ $("#add-nutrion-btn").on("click", function(event){
 
 });
   
-// Create Firebase event for adding nutrition to a row in the html when a user adds an entry
+//. Create Firebase event for adding nutrion to a row in the html when a user adds an entry
 dataRef.ref().on("child_added", function(childSnapshot) {
   //console.log(childSnapshot.val());
 
-  var userFirstName = childSnapshot.val().firstName;
-    $("#nav-username").text(userFirstName);
   var fooddb = childSnapshot.val().food;
   var servingdb = childSnapshot.val().serving;
   var caloriesdb = childSnapshot.val().calories;
