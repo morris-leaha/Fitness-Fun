@@ -126,7 +126,7 @@ var appendTable = function(foodObject){
 }
   
 // Create Firebase event for adding nutrition to a row in the html when a user adds an entry
-dataRef.ref("/nutrition").on("child_added", function(childSnapshot) {
+dataRef.ref("/uid/nutrition").on("child_added", function(childSnapshot) {
 
   if(currentDate)
   var foodObject = childSnapshot.val();
