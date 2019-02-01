@@ -23,6 +23,7 @@ dataRef.ref(profileRef).on("child_added", function (snapshot) {
     var userGender = snapshot.val().gender;
     var userAge = snapshot.val().userage;
     var userWeight = snapshot.val().userweight;
+    console.log(userWeight);
     var userGoalWeight = snapshot.val().usergoalweight;
     var userHeightFeet = snapshot.val().userheightfeet;
     var userHeightInches = snapshot.val().userheightinches;

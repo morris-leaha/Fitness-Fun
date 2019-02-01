@@ -14,31 +14,42 @@ firebase.initializeApp(config);
 var dataRef = firebase.database();
 var uid = sessionStorage.getItem("uid");
 var exerciseRef = "/" + uid + "/exercise";
+console.log(exerciseRef);
 var profileRef = "/" + uid + "/profile";
+console.log(profileRef);
 var userWeight;
 
 var calsPerExercise = {};
+
+//Get User's weight
+dataRef.ref(profileRef).on("value", function(snapshot){
+    snapshot.forEach(function(childSnapshot){
+        console.log(childSnapshot.val());
+        userWeight = childSnapshot.val().userweight;
+        console.log(userWeight);    
+    });
+});
 
 //Form Validation
 var validateExerciseForm = function (exercise) {
 
     if (!exercise.exercisename ||
         !exercise.exerciseduration ||
-        //!exercise.exercisecalsburned ||
+        !exercise.calsBurn ||
         !exercise.exercisecurrentTime
     ) {
         console.log("Form Failed");
     } else {
-        dataRef.ref("/exercise").push(exercise)
+        dataRef.ref(exerciseRef).push(exercise)
         $("#exercise-name-input").val("");
         $("#exercise-duration-input").val("");
-       // $("#exercise-cals-burned-input").val("");
+        // $("#exercise-cals-burned-input").val("");
     }
 }
 // adding exercise to table 
 $("#add-exercise-btn").on("click", function (event) {
     event.preventDefault();
-    console.log("hello");
+    //console.log("hello");
     // get input data
     // var classification = "exercise";
     var exercisename = $(".exercise-name-input option:selected").val();
@@ -48,8 +59,8 @@ $("#add-exercise-btn").on("click", function (event) {
     //var exercisecalsburned = $("#exercise-cals-burned-input").val().trim();
     var exercisecurrentTime = moment().format("YYYY-MM-DD HH:mm Z");
 
-    var calsBurn = exerciseMet * exerciseduration;
-    console.log(calsBurn)
+    var calsBurn = Math.round(exerciseMet * (exerciseduration / 60) * (userWeight / 2.2));
+    console.log(calsBurn);
 
     console.log(exercisename);
     console.log(exerciseduration);
@@ -62,31 +73,27 @@ $("#add-exercise-btn").on("click", function (event) {
         exercisename: exercisename,
         exerciseduration: exerciseduration,
         //exercisecalsburned: exercisecalsburned,
+        calsBurn: calsBurn,
         exercisecurrentTime: exercisecurrentTime
     };
 
     validateExerciseForm(exerciseInfo);
 });
 
-dataRef.ref(profileRef).on("value", function(snapshot){
-    snapshot.forEach(function(childSnapshot){
-        userWeight = childSnapshot.userweight;
-        console.log(userWeight);
-    })
-})
 // Create Firebase event for adding to a row in the html when a user adds an entry
 dataRef.ref(exerciseRef).on("child_added", function (childSnapshot) {
-    //console.log(childSnapshot.val());
+    console.log(childSnapshot.val());
     var userFirstName = childSnapshot.val().firstName;
     $("#nav-username").text(userFirstName);
     var exercisedurationdb = childSnapshot.val().exerciseduration;
     //var exercisecalsburneddb = childSnapshot.val().exercisecalsburned;
+    var calsBurndb = childSnapshot.val().calsBurn;
     var exercisenamedb = childSnapshot.val().exercisename;
 
 
-    var exerciseData = childSnapshot.val().exercise;
-    var durationData = childSnapshot.val().duration;
-    var burnCalorieData = childSnapshot.val().exercisecalsburned;
+    // var exerciseData = childSnapshot.val().exercise;
+    // var durationData = childSnapshot.val().duration;
+    // var burnCalorieData = childSnapshot.val().exercisecalsburned;
     
     
 
@@ -97,8 +104,10 @@ dataRef.ref(exerciseRef).on("child_added", function (childSnapshot) {
 
         $("<td>").text(exercisenamedb),
         $("<td>").text(exercisedurationdb),
-        $("<td>").text(exercisecalsburneddb),
+        $("<td>").text(calsBurndb),
     );
+
+    console.log(exerciseRow);
 
     // Append the new row to the table
     $("#exercise-table > tbody").append(exerciseRow);
