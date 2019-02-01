@@ -1,23 +1,5 @@
 //Nutritionix API: 68bd18dff81e4268ce3dd68b02a4f509
 
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
-
 // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDgFgcmDm5gwBlUoc9cv6174w5gHjiPkU0",
@@ -48,8 +30,7 @@ var validateNutritionForm = function(nutrition){
      !nutrition.calories || 
      !nutrition.fat || 
      !nutrition.carbs || 
-     !nutrition.protein || 
-     !nutrition.meal || 
+     !nutrition.protein ||
      !nutrition.entryTime || 
      isNaN(nutrition.serving) ||
      isNaN(nutrition.calories) ||
@@ -83,12 +64,7 @@ $("#add-nutrition-btn").on("click", function(event){
   var fat = $("#fat-input").val().trim();
   var carbs = $("#carbs-input").val().trim();
   var protein = $("#protein-input").val().trim();
-  var meal = $("#meal-input").val().trim();
-  if(meal === "Choose Meal..."){
-    meal = "";
-  }
   var entryTime = moment().format("YYYY-MM-DD HH:mm");
-  var entryDate = moment().format("YYYY-MM-DD");
 
 
 
@@ -98,9 +74,7 @@ $("#add-nutrition-btn").on("click", function(event){
   console.log(fat);
   console.log(carbs);
   console.log(protein);
-  console.log(meal);
   console.log(entryTime);
-  console.log(entryDate);
 
   //Creates local "temporary" object for holding train data
   var NutritionFact ={
@@ -110,105 +84,96 @@ $("#add-nutrition-btn").on("click", function(event){
     calories: calories,
     carbs: carbs,
     protein: protein,
-    meal: meal,
-    entryDate: entryDate,
     entryTime: entryTime
   };
 
   validateNutritionForm(NutritionFact);
 });
 
-var appendTable = function(foodObject){
+var appendTable = function(foodData, diff){
+  
+  console.log("Run");
+  var dateDiff = diff;
+  var foodObject = foodData;
   var nutritionRow = $("<tr>").append(
-
     $("<td>").text(foodObject.food),
     $("<td>").text(foodObject.serving),
     $("<td>").text(foodObject.calories),
     $("<td>").text(foodObject.fat),
     $("<td>").text(foodObject.carbs),
     $("<td>").text(foodObject.protein),
-  )
- 
-  switch(foodObject.meal){
-    case "breakfast":
-      breakfastCal += parseInt(foodObject.calories);
-      $("#breakfast-table > tbody").append(nutritionRow);
-      break;
-
-    case "lunch":
-      lunchCal += parseInt(foodObject.calories);
-      $("#lunch-table > tbody").append(nutritionRow);
-      break;
-
-    case "dinner":
-      dinnerCal += parseInt(foodObject.calories);
-      $("#dinner-table > tbody").append(nutritionRow);
-      break;
-  }
-
-  $("#nutrition-table > tbody").append(nutritionRow);
-  totalCal += parseInt(foodObject.calories);
-  $("#total-cal").text(totalCal);
+  );
   
+  // if(dateDiff === 0){
+  //   console.log("daily conditional ran")
+  //   $("#nutrition-body").append(nutritionRow);
+  //   $("#three-day-body").append(nutritionRow);
+  // } else if(dataDiff < 4) {
+  //   console.log("three day conditional ran");
+  //   console.log(nutritionRow);
+  //   $("#three-day-body").append(nutritionRow);
+  // }
+    
+  $("nutrition-body").append(nutritionRow);
 }
   
 // Create Firebase event for adding nutrition to a row in the html when a user adds an entry
-dataRef.ref(nutrRef).on("child_added", function(childSnapshot) {
+dataRef.ref(nutrRef).on("child_added", function(snapshot) {
+  //snapshot.forEach(function(childSnapshot){
+    var foodObject = snapshot.val();
+    console.log(foodObject);
+    var entryTimeConv = moment(foodObject.entryTime, "YYYY-MM-DD");
+    console.log(entryTimeConv);
+    var currentTime = moment();
+    var currentTimeConv = moment(currentTime, "YYYY-MM-DD");
+    console.log(currentTimeConv);
+    //var dateDiff = convCurrTime.diff(initDate, "days");
 
-  if(currentDate)
-  var foodObject = childSnapshot.val();
-  var initDate = moment(foodObject.entryTime, "YYYY-MM-DD");
-  var currentTime = moment();
-  var convCurrTime = moment(currentTime, "YYYY-MM-DD");
-  var dateDiff = convCurrTime.diff(initDate, "days");
-  if(dateDiff < 8){
-    appendTable(foodObject);
-  }
+    //console.log(dateDiff);
+
+    if(entryTimeConv === currentTimeConv){
+      //appendTable(foodObject, dateDiff);
+      var nutritionRow = $("<tr>").append(
+        $("<td>").text(foodObject.food),
+        $("<td>").text(foodObject.serving),
+        $("<td>").text(foodObject.calories),
+        $("<td>").text(foodObject.fat),
+        $("<td>").text(foodObject.carbs),
+        $("<td>").text(foodObject.protein),
+      );
+      $("nutrition-body").append(nutritionRow);
+    }
+  //});
 });
 
 
 // Function to hide and show tables based on what the user selects in the meal-output select element on the HTML
-$("#meal-output").on("click", function(){
+$("#table-select").on("click", function(){
 
   var selection = $(this).val().trim();
 
   switch(selection) {
 
-    case "breakfast": 
-      $("#breakfast-table").show();
+    case "three-day": 
+      $("#three-day-table").show();
       $("#nutrition-table").hide();
-      $("#lunch-table").hide();
-      $("#dinner-table").hide();
-      $("#total-cal").text(breakfastCal);
+      $("#one-week-table").hide();
       break;
 
-    case "lunch": 
-      $("#lunch-table").show();
+    case "one-week": 
+      $("#one-week-table").show();
       $("#nutrition-table").hide();
-      $("#breakfast-table").hide();
-      $("#dinner-table").hide();
-      $("#total-cal").text(lunchCal);
-      break;
-
-    case "dinner": 
-      $("#dinner-table").show();
-      $("#nutrition-table").hide();
-      $("#breakfast-table").hide();
-      $("#lunch-table").hide();
-      $("#total-cal").text(dinnerCal);
+      $("#three-day-table").hide();
       break;
 
     default:
       $("#nutrition-table").show();
-      $("#breakfast-table").hide();
-      $("#lunch-table").hide();
-      $("#dinner-table").hide();
-      $("#total-cal").text(totalCal);
+      $("#three-day-table").hide();
+      $("#one-week-table").hide();
       break;
   }
 });
 
 $("#nutrition-table").show();
-$("#breakfast-table").hide();
-$("#lunch-table").hide();
-$("#dinner-table").hide();
+$("#three-day-table").hide();
+$("#one-week-table").hide();
