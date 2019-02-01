@@ -10,9 +10,23 @@ var config = {
 firebase.initializeApp(config);
 
 var dataRef = firebase.database();
+var uid = sessionStorage.getItem("uid");
+console.log(uid);
+var profileRef = "/" + uid + "/profile"
 
-dataRef.ref().on("child_added", function (childSnapshot) {
-    console.log(childSnapshot.val());
+//Read cookie containing user data, only works if cookie contains one key-value pair
+var readCookie = function(){
+    
+    //Split key and value
+    if(document.cookies){
+        var cookieParts = document.cookie.split("=");
+        var uid = cookieParts[1].slice(0, -1);
+        return uid;
+    }
+    return null;
+}
+
+dataRef.ref(profileRef).on("child_added", function (childSnapshot) {
 
     // grabbing the values from FB DB and storing relavent info in variables
     var userFirstName = childSnapshot.val().firstName;
@@ -26,13 +40,10 @@ dataRef.ref().on("child_added", function (childSnapshot) {
 
     // calculating user BMR, or user daily calories
     var convertedWeight = (userWeight / 2.205);
-    console.log("Weight in kgs: " + convertedWeight);
 
     var convertedHeightInches = ((userHeightFeet * 12) + parseInt(userHeightInches));
-    console.log("Height in inches: " + convertedHeightInches);
 
     var convertedHeightCentimeters = (convertedHeightInches * 2.54);
-    console.log("Height in cms: " + convertedHeightCentimeters);
 
 
     if (userGender === "male") {
@@ -45,17 +56,20 @@ dataRef.ref().on("child_added", function (childSnapshot) {
         console.log("Female current BMR: " + femaleBMR);
         $("#user-dailyCals").text(femaleBMR);
     }
-
-
-    // need to pull total daily calories from FB & write to DOM:
-        // $("#user-nutrCals").text(whateverwecallthisvariable);
-        
-    // need to pull total daily calories burned from FB & write to DOM:
-        // $("user-exercCals").text(whateverwecallthisvariable);
-
-    // some functionality to change daily caloric intake based on goal weight? 
-    
-
-
 });
 
+dataRef.ref().on("value", function(snapshot){
+    snapshot.forEach(function(childSnapshot){
+        var childData = childSnapshot.val();
+
+        if(childData.classification === "exercise"){
+            console.log(childData);
+        }
+    });
+});
+
+//uid = readCookie();
+
+// if(!uid){
+//     window.location.href = "index.html";
+// }

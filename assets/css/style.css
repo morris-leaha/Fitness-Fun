@@ -140,6 +140,10 @@ img {
     text-transform: capitalize;
 }
 
+#validation-text {
+    display:none;
+}
+
 .sticky-footer {
     flex-shrink: 0;
     font-size: 0.8rem;
