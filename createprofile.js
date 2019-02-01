@@ -53,7 +53,7 @@ $("#createprofile").on("click", function (event) {
     useractivitylevel: userActivityLevel,
   };
 
-  dataRef.ref().push(createprofile);
+  dataRef.ref("/createprofile").push(createprofile);
 
   // clearing input fields 
   $("#firstName").val("");

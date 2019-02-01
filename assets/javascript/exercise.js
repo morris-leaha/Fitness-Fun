@@ -16,15 +16,14 @@ var dataRef = firebase.database();
 //Form Validation
 var validateNutritionForm = function (exercise) {
 
-    if (!exercise.classification ||
-        !exercise.exercisename ||
+    if (!exercise.exercisename ||
         !exercise.exerciseduration ||
         !exercise.exercisecalsburned ||
         !exercise.exercisecurrentTime
     ) {
         console.log("Form Failed");
     } else {
-        dataRef.ref().push(exercise)
+        dataRef.ref("/exercise").push(exercise)
         $("#exercise-name-input").val("");
         $("#exercise-duration-input").val("");
         $("#exercise-cals-burned-input").val("");
@@ -33,13 +32,18 @@ var validateNutritionForm = function (exercise) {
 // adding exercise to table 
 $("#add-exercise-btn").on("click", function (event) {
     event.preventDefault();
-
+    console.log("hello");
     // get input data
-    var classification = "exercise";
-    var exercisename = $("#exercise-name-input").val().trim();
+    // var classification = "exercise";
+    var exercisename = $(".exercise-name-input option:selected").val();
+    var exerciseMet = $(".exercise-name-input option:selected").attr("data-met");
+    console.log(exerciseMet)
     var exerciseduration = $("#exercise-duration-input").val().trim();
     var exercisecalsburned = $("#exercise-cals-burned-input").val().trim();
     var exercisecurrentTime = moment().format("YYYY-MM-DD HH:mm Z");
+
+    var calsBurn = exerciseMet * exerciseduration;
+    console.log(calsBurn)
 
     console.log(exercisename);
     console.log(exerciseduration);
@@ -49,7 +53,6 @@ $("#add-exercise-btn").on("click", function (event) {
 
     // Creates local "temporary" object for holding data
     var exerciseInfo = {
-        classification: classification,
         exercisename: exercisename,
         exerciseduration: exerciseduration,
         exercisecalsburned: exercisecalsburned,
@@ -62,7 +65,7 @@ $("#add-exercise-btn").on("click", function (event) {
 });
 
 // Create Firebase event for adding to a row in the html when a user adds an entry
-dataRef.ref().on("child_added", function (childSnapshot) {
+dataRef.ref("/exercise").on("child_added", function (childSnapshot) {
     //console.log(childSnapshot.val());
     var userFirstName = childSnapshot.val().firstName;
     $("#nav-username").text(userFirstName);
@@ -71,22 +74,25 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     var exercisenamedb = childSnapshot.val().exercisename;
 
 
-    var exerciseData = snapshot.val().exercise;
-    var durationData = snapshot.val().duration;
-    var burnCalorieData = snapshot.val().burnCalorie;
+    var exerciseData = childSnapshot.val().exercise;
+    var durationData = childSnapshot.val().duration;
+    var burnCalorieData = childSnapshot.val().exercisecalsburned;
+    var userWeight = childSnapshot.val().userweight;
+
+    console.log(userWeight);
 
 
     // Create the new row
-    if (childSnapshot.val().classification === "exercise") {
-        var exerciseRow = $("<tr>").append(
 
-            $("<td>").text(exercisenamedb),
-            $("<td>").text(exercisedurationdb),
-            $("<td>").text(exercisecalsburneddb),
-        );
+    var exerciseRow = $("<tr>").append(
 
-        // Append the new row to the table
-        $("#exercise-table > tbody").append(exerciseRow);
-    }
+        $("<td>").text(exercisenamedb),
+        $("<td>").text(exercisedurationdb),
+        $("<td>").text(exercisecalsburneddb),
+    );
+
+    // Append the new row to the table
+    $("#exercise-table > tbody").append(exerciseRow);
+
 
 });
