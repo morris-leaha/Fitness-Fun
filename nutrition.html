@@ -120,12 +120,10 @@
                                     </a>
                                 </div>
                                 <div class="choose-meal-category form-group col-md-2 px-0">
-                                    <select class="form-control" id="meal-output" type="text" name="Meal">
-                                        <option selected>Choose Meal...</option>
-                                        <option value="breakfast" z>Breakfast</option>
-                                        <option value="lunch">Lunch</option>
-                                        <option value="dinner">Dinner</option>
-                                        <option value="dailytotal">Daily Total</option>
+                                    <select class="form-control" id="table-select" type="text" name="Table">
+                                        <option selected>Today</option>
+                                        <option value="three-day">Past 3 Days</option>
+                                        <option value="one-week">Past Week</option>
                                     </select>
                                 </div>
                             </div>
@@ -141,55 +139,7 @@
                                             <th scope="col">Protein (g)</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-
-                                <table class="table table-sm table-hover" id="breakfast-table">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th scope="col">Food</th>
-                                            <th scope="col">Serving</th>
-                                            <th scope="col">Cal</th>
-                                            <th scope="col">Fat (g)</th>
-                                            <th scope="col">Carbs (g)</th>
-                                            <th scope="col">Protein (g)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-
-                                <table class="table table-sm table-hover" id="lunch-table">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th scope="col">Food</th>
-                                            <th scope="col">Serving</th>
-                                            <th scope="col">Cal</th>
-                                            <th scope="col">Fat (g)</th>
-                                            <th scope="col">Carbs (g)</th>
-                                            <th scope="col">Protein (g)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-
-                                <table class="table table-sm table-hover" id="dinner-table">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th scope="col">Food</th>
-                                            <th scope="col">Serving</th>
-                                            <th scope="col">Cal</th>
-                                            <th scope="col">Fat (g)</th>
-                                            <th scope="col">Carbs (g)</th>
-                                            <th scope="col">Protein (g)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                    <tbody id ="nutrition-body">
 
                                     </tbody>
                                 </table>
@@ -209,12 +159,6 @@
                                 <div class="card-header">
                                     <div class="choose-meal-category form-group col-md-2 px-0">
                                         <label for="mealView"><b>Add Nutrition Manually</b></label>
-                                        <select class="form-control" id="meal-input" type="text" name="Meal">
-                                            <option selected>Choose Meal...</option>
-                                            <option value="breakfast">Breakfast</option>
-                                            <option value="lunch">Lunch</option>
-                                            <option value="dinner">Dinner</option>
-                                        </select>
                                     </div>
                                 </div>
                                 <div class="card-body">

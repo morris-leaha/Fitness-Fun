@@ -1,23 +1,5 @@
 //Nutritionix API: 68bd18dff81e4268ce3dd68b02a4f509
 
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
-
 // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDgFgcmDm5gwBlUoc9cv6174w5gHjiPkU0",
@@ -33,7 +15,7 @@
 var dataRef = firebase.database();
 var uid = sessionStorage.getItem("uid");
 console.log(uid);
-var nutrRef = "/" + uid + "/nutrition"
+var nutrRef = uid + "/nutrition";
 var totalCal = 0;
 var breakfastCal = 0;
 var lunchCal = 0;
@@ -48,8 +30,7 @@ var validateNutritionForm = function(nutrition){
      !nutrition.calories || 
      !nutrition.fat || 
      !nutrition.carbs || 
-     !nutrition.protein || 
-     !nutrition.meal || 
+     !nutrition.protein ||
      !nutrition.entryTime || 
      isNaN(nutrition.serving) ||
      isNaN(nutrition.calories) ||
@@ -76,19 +57,15 @@ $("#add-nutrition-btn").on("click", function(event){
 
   $("#validation-text").hide();
 
-  //get nutrion input data
+  //get nutrition input data
   var food = $("#food-input").val().trim();
   var serving = $("#serving-input").val().trim();
   var calories = $("#cal-input").val().trim();
   var fat = $("#fat-input").val().trim();
   var carbs = $("#carbs-input").val().trim();
   var protein = $("#protein-input").val().trim();
-  var meal = $("#meal-input").val().trim();
-  if(meal === "Choose Meal..."){
-    meal = "";
-  }
   var entryTime = moment().format("YYYY-MM-DD HH:mm");
-  var entryDate = moment().format("YYYY-MM-DD");
+  console.log(entryTime);
 
 
 
@@ -98,9 +75,7 @@ $("#add-nutrition-btn").on("click", function(event){
   console.log(fat);
   console.log(carbs);
   console.log(protein);
-  console.log(meal);
   console.log(entryTime);
-  console.log(entryDate);
 
   //Creates local "temporary" object for holding train data
   var NutritionFact ={
@@ -110,105 +85,68 @@ $("#add-nutrition-btn").on("click", function(event){
     calories: calories,
     carbs: carbs,
     protein: protein,
-    meal: meal,
-    entryDate: entryDate,
     entryTime: entryTime
   };
 
   validateNutritionForm(NutritionFact);
 });
 
-var appendTable = function(foodObject){
-  var nutritionRow = $("<tr>").append(
+var updateTotalCals = function(cals, time){
 
-    $("<td>").text(foodObject.food),
-    $("<td>").text(foodObject.serving),
-    $("<td>").text(foodObject.calories),
-    $("<td>").text(foodObject.fat),
-    $("<td>").text(foodObject.carbs),
-    $("<td>").text(foodObject.protein),
-  )
- 
-  switch(foodObject.meal){
-    case "breakfast":
-      breakfastCal += parseInt(foodObject.calories);
-      $("#breakfast-table > tbody").append(nutritionRow);
-      break;
+  var totalCals = cals;
+  var entryTime = time;
+  dataRef.ref(uid).once("value", function(snapshot){
+    if(!snapshot.hasChild("total-cals")){
+      dataRef.ref(uid + "/total-cals/" + entryTime).push(totalCals);
+      console.log("New branch attempted...")
+    } else {
+      dataRef.ref(uid + "/total-cals").once("value", function(snapshot){
+        if(!snapshot.hasChild(entryTime)){
+          dataRef.ref(uid + "/total-cals/" + entryTime).push({totalCals: totalCals});
+        } else {
+          dataRef.ref(uid + "/total-cals/").child(entryTime).update({totalCals});
+        }
+      })
+    }
+  })
+}
 
-    case "lunch":
-      lunchCal += parseInt(foodObject.calories);
-      $("#lunch-table > tbody").append(nutritionRow);
-      break;
+var appendTable = function(foodData, entryTime){
 
-    case "dinner":
-      dinnerCal += parseInt(foodObject.calories);
-      $("#dinner-table > tbody").append(nutritionRow);
-      break;
-  }
-
-  $("#nutrition-table > tbody").append(nutritionRow);
+  var foodObject = foodData;
   totalCal += parseInt(foodObject.calories);
-  $("#total-cal").text(totalCal);
   
+  var nutritionRow = $("<tr>");
+  var foodLabel = $("<td>").text(foodObject.food);
+  var servingsLabel = $("<td>").text(foodObject.serving);
+  var caloriesLabel = $("<td>").text(foodObject.calories);
+  var fatLabel = $("<td>").text(foodObject.fat);
+  var carbsLabel = $("<td>").text(foodObject.carbs);
+  var proteinLabel = $("<td>").text(foodObject.protein);
+  nutritionRow.append(foodLabel, servingsLabel, caloriesLabel, fatLabel, carbsLabel, proteinLabel);
+  
+  $("#nutrition-body").append(nutritionRow);
+  $("#total-cal").text(totalCal);
+  updateTotalCals(totalCal, entryTime);
 }
   
 // Create Firebase event for adding nutrition to a row in the html when a user adds an entry
-dataRef.ref(nutrRef).on("child_added", function(childSnapshot) {
+dataRef.ref(nutrRef).on("child_added", function(snapshot) {
+  //snapshot.forEach(function(childSnapshot){
+    var foodObject = snapshot.val();
+    //console.log(foodObject);
+    var entryTimeConv = moment(foodObject.entryTime).format("YYYY-MM-DD");
+    console.log(entryTimeConv);
+    var currentTime = moment().format("YYYY-MM-DD");
+    //var currentTimeConv = moment(currentTime, "DD/MM/YYYY");
+    console.log(currentTime);
+    //var dateDiff = currentTime.diff(entryTimeConv, "days");
+    //console.log(dateDiff);
 
-  if(currentDate)
-  var foodObject = childSnapshot.val();
-  var initDate = moment(foodObject.entryTime, "YYYY-MM-DD");
-  var currentTime = moment();
-  var convCurrTime = moment(currentTime, "YYYY-MM-DD");
-  var dateDiff = convCurrTime.diff(initDate, "days");
-  if(dateDiff < 8){
-    appendTable(foodObject);
-  }
+    //console.log(dateDiff);
+
+    if(entryTimeConv === currentTime){
+      appendTable(foodObject, entryTimeConv);
+    }
+  //});
 });
-
-
-// Function to hide and show tables based on what the user selects in the meal-output select element on the HTML
-$("#meal-output").on("click", function(){
-
-  var selection = $(this).val().trim();
-
-  switch(selection) {
-
-    case "breakfast": 
-      $("#breakfast-table").show();
-      $("#nutrition-table").hide();
-      $("#lunch-table").hide();
-      $("#dinner-table").hide();
-      $("#total-cal").text(breakfastCal);
-      break;
-
-    case "lunch": 
-      $("#lunch-table").show();
-      $("#nutrition-table").hide();
-      $("#breakfast-table").hide();
-      $("#dinner-table").hide();
-      $("#total-cal").text(lunchCal);
-      break;
-
-    case "dinner": 
-      $("#dinner-table").show();
-      $("#nutrition-table").hide();
-      $("#breakfast-table").hide();
-      $("#lunch-table").hide();
-      $("#total-cal").text(dinnerCal);
-      break;
-
-    default:
-      $("#nutrition-table").show();
-      $("#breakfast-table").hide();
-      $("#lunch-table").hide();
-      $("#dinner-table").hide();
-      $("#total-cal").text(totalCal);
-      break;
-  }
-});
-
-$("#nutrition-table").show();
-$("#breakfast-table").hide();
-$("#lunch-table").hide();
-$("#dinner-table").hide();
