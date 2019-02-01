@@ -25,7 +25,21 @@ $("#sign-up-btn").on("click", function(event){
 
     if(email && password && confirmPass && confirmPass === password){
         
-        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
+        firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
+
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                  currentUser = user;
+                  console.log(user);
+                  uid = user.uid;
+                  console.log(uid);
+                  sessionStorage.setItem("uid", uid);
+                  console.log(sessionStorage.getItem("uid"));
+                  window.location.href = "createprofile.html";
+                }
+            });
+            
+        }).catch(function(error){
             var errorCode = error.code;
             var errorMessage = error.message;
 
@@ -34,20 +48,7 @@ $("#sign-up-btn").on("click", function(event){
         });
 
 
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-              currentUser = user;
-              console.log(user);
-              uid = user.uid;
-              console.log(uid);
-              document.cookie = "uid=" + uid  + ";";
-              console.log(document.cookie)
-            } else {
-              console.log("Log In Failed");
-            }
-          });
-
-        window.location.href = "createprofile.html";
+        
         
 
     } else {

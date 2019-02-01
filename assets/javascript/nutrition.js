@@ -31,7 +31,6 @@
 
 
 var dataRef = firebase.database();
-var nutrReference = dataRef.ref("/" + uid + "/nutrition");
 var totalCal = 0;
 var breakfastCal = 0;
 var lunchCal = 0;
@@ -57,7 +56,7 @@ var validateNutritionForm = function(nutrition){
     $("#validation-text").show();
     console.log("Form Failed"); // add modal or look into (jQuery.after) to tell user input is incorrect 
   } else {
-    dataRef.ref().push(nutrition)
+    dataRef.ref("/nutrition").push(nutrition)
     $("#food-input").val("");
     $("#serving-input").val("");
     $("#cal-input").val("");

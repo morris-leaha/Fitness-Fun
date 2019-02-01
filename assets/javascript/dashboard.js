@@ -10,7 +10,8 @@ var config = {
 firebase.initializeApp(config);
 
 var dataRef = firebase.database();
-var uid;
+var uid = sessionStorage.getItem("uid");
+console.log(uid);
 
 //Read cookie containing user data, only works if cookie contains one key-value pair
 var readCookie = function(){
