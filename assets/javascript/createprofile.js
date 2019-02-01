@@ -11,7 +11,10 @@
   };
   firebase.initializeApp(config);
 
+var uid = sessionStorage.getItem("uid");
+console.log(uid);
 var dataRef = firebase.database();
+var profileRef = "/" + uid + "/profile"
 
 $("#createprofile").on("click", function (event) {
 
@@ -53,7 +56,7 @@ $("#createprofile").on("click", function (event) {
     useractivitylevel: userActivityLevel,
   };
 
-  dataRef.ref().push(createprofile);
+  dataRef.ref(profileRef).push(createprofile);
 
   // clearing input fields 
   $("#firstName").val("");

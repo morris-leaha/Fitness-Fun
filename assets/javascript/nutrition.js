@@ -31,7 +31,9 @@
 
 
 var dataRef = firebase.database();
-var nutrReference = dataRef.ref("/" + uid + "/nutrition");
+var uid = sessionStorage.getItem("uid");
+console.log(uid);
+var nutrRef = "/" + uid + "/nutrition"
 var totalCal = 0;
 var breakfastCal = 0;
 var lunchCal = 0;
@@ -48,7 +50,7 @@ var validateNutritionForm = function(nutrition){
      !nutrition.carbs || 
      !nutrition.protein || 
      !nutrition.meal || 
-     !nutrition.currentTime || 
+     !nutrition.entryTime || 
      isNaN(nutrition.serving) ||
      isNaN(nutrition.calories) ||
      isNaN(nutrition.fat) ||
@@ -57,7 +59,7 @@ var validateNutritionForm = function(nutrition){
     $("#validation-text").show();
     console.log("Form Failed"); // add modal or look into (jQuery.after) to tell user input is incorrect 
   } else {
-    dataRef.ref().push(nutrition)
+    dataRef.ref(nutrRef).push(nutrition)
     $("#food-input").val("");
     $("#serving-input").val("");
     $("#cal-input").val("");
@@ -151,7 +153,7 @@ var appendTable = function(foodObject){
 }
   
 // Create Firebase event for adding nutrition to a row in the html when a user adds an entry
-dataRef.ref("/nutrition").on("child_added", function(childSnapshot) {
+dataRef.ref(nutrRef).on("child_added", function(childSnapshot) {
 
   if(currentDate)
   var foodObject = childSnapshot.val();
@@ -197,12 +199,12 @@ $("#meal-output").on("click", function(){
       break;
 
     default:
-    $("#nutrition-table").show();
-    $("#breakfast-table").hide();
-    $("#lunch-table").hide();
-    $("#dinner-table").hide();
-    $("#total-cal").text(totalCal);
-    break;
+      $("#nutrition-table").show();
+      $("#breakfast-table").hide();
+      $("#lunch-table").hide();
+      $("#dinner-table").hide();
+      $("#total-cal").text(totalCal);
+      break;
   }
 });
 

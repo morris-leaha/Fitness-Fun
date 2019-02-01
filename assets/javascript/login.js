@@ -14,7 +14,7 @@ firebase.initializeApp(config);
 var dataRef = firebase.database();
 
 //*******************************index html*************************/
-$("#login").on("click", function(event){
+$("#login-btn").on("click", function(event){
 
   console.log("Log In Button Clicked");
 
@@ -23,27 +23,24 @@ $("#login").on("click", function(event){
   var email = $("#email-login").val().trim();
   var password = $("#password-login").val().trim();
 
-  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        currentUser = user;
+        console.log(user);
+        uid = user.uid;
+        console.log(uid);
+        sessionStorage.setItem("uid", uid);    
+        console.log(sessionStorage.getItem("uid"));
+        window.location.href = "dashboard.html"
+      }
+    });
+  }).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
 
       console.log(errorCode);
       console.log(errorMessage);
-      
   });
-
-  firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        currentUser = user;
-            console.log(user);
-            uid = user.uid;
-            console.log(uid);
-            document.cookie = "uid=" + uid  + ";";
-            console.log(document.cookie);
-      } else {
-        console.log("Log In Failed");
-      }
-  });
-
-  window.location.href = "dashboard.html";
 });

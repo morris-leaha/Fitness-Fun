@@ -10,7 +10,9 @@ var config = {
 firebase.initializeApp(config);
 
 var dataRef = firebase.database();
-var uid;
+var uid = sessionStorage.getItem("uid");
+console.log(uid);
+var profileRef = "/" + uid + "/profile"
 
 //Read cookie containing user data, only works if cookie contains one key-value pair
 var readCookie = function(){
@@ -24,8 +26,7 @@ var readCookie = function(){
     return null;
 }
 
-dataRef.ref().on("child_added", function (childSnapshot) {
-    console.log(childSnapshot.val());
+dataRef.ref(profileRef).on("child_added", function (childSnapshot) {
 
     // grabbing the values from FB DB and storing relavent info in variables
     var userFirstName = childSnapshot.val().firstName;
@@ -39,13 +40,10 @@ dataRef.ref().on("child_added", function (childSnapshot) {
 
     // calculating user BMR, or user daily calories
     var convertedWeight = (userWeight / 2.205);
-    console.log("Weight in kgs: " + convertedWeight);
 
     var convertedHeightInches = ((userHeightFeet * 12) + parseInt(userHeightInches));
-    console.log("Height in inches: " + convertedHeightInches);
 
     var convertedHeightCentimeters = (convertedHeightInches * 2.54);
-    console.log("Height in cms: " + convertedHeightCentimeters);
 
 
     if (userGender === "male") {
