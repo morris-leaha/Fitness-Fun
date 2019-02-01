@@ -10,20 +10,23 @@ var config = {
 firebase.initializeApp(config);
 
 var dataRef = firebase.database();
+var uid = sessionStorage.getItem("uid");
+console.log(uid);
+var profileRef = "/" + uid + "/profile";
 
-dataRef.ref().on("child_added", function (childSnapshot) {
-    console.log(childSnapshot.val());
+dataRef.ref(profileRef).on("child_added", function (snapshot) {
 
     // grabbing the values from FB DB and storing relavent info in variables
-    var userFirstName = childSnapshot.val().firstName;
-    var userLastName = childSnapshot.val().lastName;
-    var userGender = childSnapshot.val().gender;
-    var userAge = childSnapshot.val().userage;
-    var userWeight = childSnapshot.val().userweight;
-    var userGoalWeight = childSnapshot.val().usergoalweight;
-    var userHeightFeet = childSnapshot.val().userheightfeet;
-    var userHeightInches = childSnapshot.val().userheightinches;
-    var userActLevel = childSnapshot.val().useractivitylevel;
+    var userFirstName = snapshot.val().firstName;
+    console.log(userFirstName);
+    var userLastName = snapshot.val().lastName;
+    var userGender = snapshot.val().gender;
+    var userAge = snapshot.val().userage;
+    var userWeight = snapshot.val().userweight;
+    var userGoalWeight = snapshot.val().usergoalweight;
+    var userHeightFeet = snapshot.val().userheightfeet;
+    var userHeightInches = snapshot.val().userheightinches;
+    var userActLevel = snapshot.val().useractivitylevel;
 
     $("#nav-username").text(userFirstName);
     $("#userName").text(userFirstName + " " + userLastName);
@@ -34,3 +37,7 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     $("#userHeight").text(userHeightFeet + "' " + userHeightInches + '"');
     $("#userActLevel").text(userActLevel);
 });
+
+if(uid) {
+
+}
