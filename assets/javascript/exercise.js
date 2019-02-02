@@ -119,9 +119,6 @@ $(document).ready(function() {
         
     });
 
-    $(".tokenClass").click(function(){
-
-    })
 
 });
 
