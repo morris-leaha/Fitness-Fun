@@ -116,4 +116,7 @@ $("#sign-out").on("click", function(){
     });
 });
 
+$("#sign-in").hide();
+$("#sign-up").hide();
+
 
