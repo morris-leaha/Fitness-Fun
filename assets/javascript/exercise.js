@@ -68,20 +68,63 @@ $("#add-exercise-btn").on("click", function (event) {
     validateExerciseForm(exerciseInfo);
 });
 
+
+// Create Firebase event for adding to a row in the html when a user adds an entry
+dataRef.ref(exerciseRef).on("child_added", function (childSnapshot) {
+    //console.log(childSnapshot.val());
+    var userFirstName = childSnapshot.val().firstName;
+    $("#nav-username").text(userFirstName);
+    var exercisedurationdb = childSnapshot.val().exerciseduration;
+    var calsBurndb = childSnapshot.val().calsBurn;
+    var exercisenamedb = childSnapshot.val().exercisename;
+
+
+    
+    // Create the new row
+
+    var exerciseRow = $("<tr>").append(
+
+        $("<td>").text(exercisenamedb),
+        $("<td>").text(exercisedurationdb),
+        $("<td>").text(calsBurndb),
+    );
+
+    //console.log(exerciseRow);
+
+    // Append the new row to the table
+    $("#exercise-table > tbody").append(exerciseRow);
+
+
+});
+
+var pageToken = "";
+
+
+$(document).ready(function() {
+
+    $(".popup").hide();
+    $(".overlayBg").hide();
+     
+    $("#search-submit").click(function(){
+    
+        searchYoutube();
+        
+    });
+
 var updateTotalBurnedCals = function(cals, time){
 
-    var totalCalsBurned = cals;
+    var totalCals = cals;
     var entryTime = time;
     dataRef.ref(uid).once("value", function(snapshot){
       if(!snapshot.hasChild("total-cals-burned")){
-        dataRef.ref(uid + "/total-cals-burned/" + entryTime).push(totalCalsBurned);
+        dataRef.ref(uid + "/total-cals-burned/" + entryTime).push(totalCals);
         console.log("New branch attempted...")
       } else {
         dataRef.ref(uid + "/total-cals-burned").once("value", function(snapshot){
           if(!snapshot.hasChild(entryTime)){
-            dataRef.ref(uid + "/total-cals-burned/" + entryTime).push({totalCalsBurned: totalCalsBurned});
+            dataRef.ref(uid + "/total-cals-burned/" + entryTime).push({totalCals: totalCals});
           } else {
-            dataRef.ref(uid + "/total-cals-burned/").child(entryTime).update({totalCalsBurned});
+            dataRef.ref(uid + "/total-cals-burned/").child(entryTime).update({totalCals});
           }
         })
       }
