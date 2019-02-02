@@ -52,12 +52,13 @@ var getDateLabel = function(number){
 
     return label;
 }
-var getChartDataObj = function(chartDataArray, label, titleText){
+var getChartDataObj = function(chartDataArray, label, titleText, color){
     
 
     chartData = {
         label : label,
         titleText: titleText,
+        color: color,
         first: {
             label: getDateLabel(chartDataArray[0].label),
             data: chartDataArray[0].data
@@ -133,7 +134,8 @@ var renderChart = function(chartCanvas, chartData) {
                     chartData.fifth.data,
                     chartData.sixth.data,
                     chartData.seventh.data
-                ]
+                ],
+                backgroundColor: chartData.color
             }]
         },
         options: {
@@ -168,6 +170,7 @@ var getChartData =  function(category){
     var refChild;
     var chartTitle;
     var chartLabel;
+    var chartColor;
     var chartID;
 
     switch(category){
@@ -176,6 +179,7 @@ var getChartData =  function(category){
             refChild = "total-cals";
             chartTitle = "Daily Calories from Food (Past Week)";
             chartLabel = "Calories";
+            chartColor = "#008080";
             chartID = "nutrition-chart";
             break;
 
@@ -183,6 +187,7 @@ var getChartData =  function(category){
             refChild = "cals-burned";
             chartTitle = "Daily Calories Burned (Past Week)";
             chartLabel = "Calories";
+            chartColor = "#cc5500";
             chartID = "exercise-chart";
             break;
     }
@@ -206,7 +211,7 @@ var getChartData =  function(category){
             };
             chartDataArray.push(chartData);
         }
-        chartDataFinal = getChartDataObj(chartDataArray, chartLabel, chartTitle);
+        chartDataFinal = getChartDataObj(chartDataArray, chartLabel, chartTitle, chartColor);
         console.log(chartID);
         var canvas = document.getElementById(chartID).getContext('2d');
         renderChart(canvas, chartDataFinal);
