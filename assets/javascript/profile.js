@@ -48,6 +48,5 @@ $("#sign-out").on("click", function(){
         console.log("Sign Out Error", error);
     });
 });
-
 $("#sign-in").hide();
 $("#sign-up").hide();
