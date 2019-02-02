@@ -12,19 +12,211 @@ firebase.initializeApp(config);
 var dataRef = firebase.database();
 var uid = sessionStorage.getItem("uid");
 console.log(uid);
-var profileRef = "/" + uid + "/profile"
+var profileRef = uid + "/profile"
+var nutrRef = uid + "/nutrition"
+var exerciseRef  = uid + "/exercise"
 
-//Read cookie containing user data, only works if cookie contains one key-value pair
-var readCookie = function(){
-    
-    //Split key and value
-    if(document.cookies){
-        var cookieParts = document.cookie.split("=");
-        var uid = cookieParts[1].slice(0, -1);
-        return uid;
+var getDateLabel = function(number){
+
+    var label = "";
+    switch(number){
+
+        case 0:
+            label = "Sun.";
+            break;
+        
+        case 1:
+            label = "Mon.";
+            break;
+        
+        case 2:
+            label = "Tue."
+            break;
+
+        case 3:
+            label = "Wed.";
+            break;
+
+        case 4:
+            label = "Thu.";
+            break;
+
+        case 5:
+            label = "Fri.";
+            break;
+
+        case 6:
+            label = "Sat."
+            break;
     }
-    return null;
+
+    return label;
 }
+var getChartDataObj = function(chartDataArray, label, titleText, color){
+    
+
+    chartData = {
+        label : label,
+        titleText: titleText,
+        color: color,
+        first: {
+            label: getDateLabel(chartDataArray[0].label),
+            data: chartDataArray[0].data
+        },
+        second: {
+            label: getDateLabel(chartDataArray[1].label),
+            data: chartDataArray[1].data
+        },
+        third: {
+            label: getDateLabel(chartDataArray[2].label),
+            data: chartDataArray[2].data
+        },
+        fourth: {
+            label: getDateLabel(chartDataArray[3].label),
+            data: chartDataArray[3].data
+        },
+        fifth: {
+            label: getDateLabel(chartDataArray[4].label),
+            data: chartDataArray[4].data
+        },
+        sixth: {
+            label: getDateLabel(chartDataArray[5].label),
+            data: chartDataArray[5].data
+        },
+        seventh: {
+            label: "Today",
+            data: chartDataArray[6].data
+        }
+    }
+
+    return chartData;
+}
+
+var getDates = function() {
+
+    var dates = [];
+    for(i = 6; i > -1; i--){
+        var date = moment().subtract(i, "days");
+        var day = date.day();
+        var dateRefString = moment().subtract(i, "days").format("YYYY-MM-DD");
+        var dateInfo = {
+            dayNumber: day,
+            refString: dateRefString
+        }
+
+        dates.push(dateInfo)
+    }
+    
+    return dates;
+}
+
+var renderChart = function(chartCanvas, chartData) {
+
+    var newChart = new Chart(chartCanvas, {
+        type: "bar",
+        data: {
+            labels: [
+                chartData.first.label, 
+                chartData.second.label, 
+                chartData.third.label, 
+                chartData.fourth.label, 
+                chartData.fifth.label, 
+                chartData.sixth.label, 
+                chartData.seventh.label
+                ],
+            datasets: [{
+                label: chartData.label,
+                data: [
+                    chartData.first.data,
+                    chartData.second.data,
+                    chartData.third.data,
+                    chartData.fourth.data,
+                    chartData.fifth.data,
+                    chartData.sixth.data,
+                    chartData.seventh.data
+                ],
+                backgroundColor: chartData.color
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: chartData.titleText
+            },
+            legend: {
+                display: false,
+                position: 'bottom'
+            },
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
+        }
+    });
+}
+
+var getChartData =  function(category){
+
+    var dateInfo = getDates();
+    var dataArray = [];
+    var chartDataArray = [];
+    var chartDataFinal = {};
+
+    var refChild;
+    var chartTitle;
+    var chartLabel;
+    var chartColor;
+    var chartID;
+
+    switch(category){
+        
+        case "nutrition":
+            refChild = "total-cals";
+            chartTitle = "Daily Calories from Food (Past Week)";
+            chartLabel = "Calories";
+            chartColor = "#008080";
+            chartID = "nutrition-chart";
+            break;
+
+        case "exercise":
+            refChild = "total-cals-burned";
+            chartTitle = "Daily Calories Burned (Past Week)";
+            chartLabel = "Calories";
+            chartColor = "#cc5500";
+            chartID = "exercise-chart";
+            break;
+    }
+
+    var targetRef = uid + "/" + refChild;
+    dataRef.ref(targetRef).once("value", function(snapshot){
+        for(i = 0; i < 7; i++){
+            var data = snapshot.child(dateInfo[i].refString).val()
+            var cals = data.totalCals;
+            if(!cals){
+                cals = 0;
+            }
+            dataArray.push(cals);
+        }
+    }).then(function(){
+
+        for(i = 0; i < 7; i++){
+            chartData = {
+                label: dateInfo[i].dayNumber,
+                data: dataArray[i]
+            };
+            chartDataArray.push(chartData);
+        }
+        chartDataFinal = getChartDataObj(chartDataArray, chartLabel, chartTitle, chartColor);
+        console.log(chartID);
+        var canvas = document.getElementById(chartID).getContext('2d');
+        renderChart(canvas, chartDataFinal);
+    });
+} 
 
 dataRef.ref(profileRef).on("child_added", function (childSnapshot) {
 
@@ -58,18 +250,20 @@ dataRef.ref(profileRef).on("child_added", function (childSnapshot) {
     }
 });
 
-dataRef.ref().on("value", function(snapshot){
-    snapshot.forEach(function(childSnapshot){
-        var childData = childSnapshot.val();
+$("#sign-out").on("click", function(){
 
-        if(childData.classification === "exercise"){
-            console.log(childData);
-        }
+    firebase.auth().signOut().then(function() {
+        sessionStorage.clear();
+        window.location.href = "index.html";
+    }, function(error){
+        console.log("Sign Out Error", error);
     });
 });
 
-//uid = readCookie();
 
-// if(!uid){
-//     window.location.href = "index.html";
-// }
+//var nutrCanvas = document.getElementById("nutrition-chart").getContext('2d');
+//var nutrData = getChartData("total-cals");
+//renderChart(nutrCanvas, nutrData);
+$("#sign-in").hide();
+$("#sign-up").hide();
+getChartData("nutrition");

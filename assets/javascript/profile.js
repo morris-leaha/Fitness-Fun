@@ -23,6 +23,7 @@ dataRef.ref(profileRef).on("child_added", function (snapshot) {
     var userGender = snapshot.val().gender;
     var userAge = snapshot.val().userage;
     var userWeight = snapshot.val().userweight;
+    console.log(userWeight);
     var userGoalWeight = snapshot.val().usergoalweight;
     var userHeightFeet = snapshot.val().userheightfeet;
     var userHeightInches = snapshot.val().userheightinches;
@@ -38,5 +39,14 @@ dataRef.ref(profileRef).on("child_added", function (snapshot) {
     $("#userActLevel").text(userActLevel);
 });
 
+$("#sign-out").on("click", function(){
+
+    firebase.auth().signOut().then(function() {
+        sessionStorage.clear();
+        window.location.href = "index.html";
+    }, function(error){
+        console.log("Sign Out Error", error);
+    });
+});
 $("#sign-in").hide();
 $("#sign-up").hide();

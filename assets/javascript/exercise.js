@@ -13,95 +13,115 @@ firebase.initializeApp(config);
 
 var dataRef = firebase.database();
 var uid = sessionStorage.getItem("uid");
+console.log(uid);
 var exerciseRef = "/" + uid + "/exercise";
-var profileRef = "/" + uid + "/profile";
-var userWeight;
-
+var totalBurnedCals = 0;
 var calsPerExercise = {};
+var currentDate = moment().format("YYYY-MM-DD");
+
 
 //Form Validation
 var validateExerciseForm = function (exercise) {
 
-    if (!exercise.exercisename ||
-        !exercise.exerciseduration ||
-        //!exercise.exercisecalsburned ||
-        !exercise.exercisecurrentTime
-    ) {
+    if (
+        !exercise.exerciseName ||
+        !exercise.exerciseDuration ||
+        !exercise.exerciseCalsBurned ||
+        !exercise.entryTime ||
+        !exercise.entryDate ||
+        isNaN(exercise.exerciseDuration) ||
+        isNaN(exercise.exerciseCalsBurned)) {
         console.log("Form Failed");
     } else {
-        dataRef.ref("/exercise").push(exercise)
+        dataRef.ref(exerciseRef).push(exercise)
         $("#exercise-name-input").val("");
         $("#exercise-duration-input").val("");
-       // $("#exercise-cals-burned-input").val("");
+        $("#exercise-cals-burned-input").val("");
     }
 }
 // adding exercise to table 
 $("#add-exercise-btn").on("click", function (event) {
     event.preventDefault();
-    console.log("hello");
-    // get input data
-    // var classification = "exercise";
-    var exercisename = $(".exercise-name-input option:selected").val();
-    var exerciseMet = $(".exercise-name-input option:selected").attr("data-met");
-    console.log(exerciseMet)
-    var exerciseduration = $("#exercise-duration-input").val().trim();
-    //var exercisecalsburned = $("#exercise-cals-burned-input").val().trim();
-    var exercisecurrentTime = moment().format("YYYY-MM-DD HH:mm Z");
 
-    var calsBurn = exerciseMet * exerciseduration;
-    console.log(calsBurn)
+    // get exercise input data
+    var exerciseName = $("#exercise-name-input").val().trim();
+    var exerciseDuration = $("#exercise-duration-input").val().trim();
+    var exerciseCalsBurned = $("#exercise-cals-burned-input").val().trim();
+    var entryTime = moment().format("YYYY-MM-DD HH:mm");
+    var entryDate = moment().format("YYYY-MM-DD");
 
-    console.log(exercisename);
-    console.log(exerciseduration);
-    //console.log(exercisecalsburned);
-    console.log(exercisecurrentTime);
-    //console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+    console.log(exerciseName);
+    console.log(exerciseDuration);
+    console.log(exerciseCalsBurned);
+    console.log(entryTime);
+    console.log(entryDate);
 
     // Creates local "temporary" object for holding data
     var exerciseInfo = {
-        exercisename: exercisename,
-        exerciseduration: exerciseduration,
-        //exercisecalsburned: exercisecalsburned,
-        exercisecurrentTime: exercisecurrentTime
+        exerciseName: exerciseName,
+        exerciseDuration: exerciseDuration,
+        exerciseCalsBurned: exerciseCalsBurned,
+        entryDate: entryDate,
+        entryTime: entryTime
     };
 
     validateExerciseForm(exerciseInfo);
 });
 
-dataRef.ref(profileRef).on("value", function(snapshot){
-    snapshot.forEach(function(childSnapshot){
-        userWeight = childSnapshot.userweight;
-        console.log(userWeight);
+var updateTotalBurnedCals = function(cals, time){
+
+    var totalCalsBurned = cals;
+    var entryTime = time;
+    dataRef.ref(uid).once("value", function(snapshot){
+      if(!snapshot.hasChild("total-cals-burned")){
+        dataRef.ref(uid + "/total-cals-burned/" + entryTime).push(totalCalsBurned);
+        console.log("New branch attempted...")
+      } else {
+        dataRef.ref(uid + "/total-cals-burned").once("value", function(snapshot){
+          if(!snapshot.hasChild(entryTime)){
+            dataRef.ref(uid + "/total-cals-burned/" + entryTime).push({totalCalsBurned: totalCalsBurned});
+          } else {
+            dataRef.ref(uid + "/total-cals-burned/").child(entryTime).update({totalCalsBurned});
+          }
+        })
+      }
     })
-})
-// Create Firebase event for adding to a row in the html when a user adds an entry
-dataRef.ref(exerciseRef).on("child_added", function (childSnapshot) {
-    //console.log(childSnapshot.val());
-    var userFirstName = childSnapshot.val().firstName;
-    $("#nav-username").text(userFirstName);
-    var exercisedurationdb = childSnapshot.val().exerciseduration;
-    //var exercisecalsburneddb = childSnapshot.val().exercisecalsburned;
-    var exercisenamedb = childSnapshot.val().exercisename;
+  }
 
-
-    var exerciseData = childSnapshot.val().exercise;
-    var durationData = childSnapshot.val().duration;
-    var burnCalorieData = childSnapshot.val().exercisecalsburned;
+var appendTable = function (exerciseData, entryTime) {
     
-    
+    var exerciseObject = exerciseData;
+    totalBurnedCals += parseInt(exerciseObject.exerciseCalsBurned)
 
+    var exerciseRow = $("<tr>");
+    var exerciseNameLabel = $("<td>").text(exerciseObject.exerciseName);
+    var exerciseDurationLabel = $("<td>").text(exerciseObject.exerciseDuration);
+    var exerciseCalsBurnedLabel = $("<td>").text(exerciseObject.exerciseCalsBurnedLabel);
+    exerciseRow.append(exerciseNameLabel, exerciseDurationLabel, exerciseCalsBurnedLabel);
 
-    // Create the new row
+    $$("#nutrition-body").append(nutritionRow);
+    $("#total-cals-burned").text(totalCalsBurned);
+    updateTotalBurnedCals(totalCalsBurned, entryTime);
+      
+}
 
-    var exerciseRow = $("<tr>").append(
-
-        $("<td>").text(exercisenamedb),
-        $("<td>").text(exercisedurationdb),
-        $("<td>").text(exercisecalsburneddb),
-    );
-
-    // Append the new row to the table
-    $("#exercise-table > tbody").append(exerciseRow);
-
-
-});
+// Create Firebase event for adding exercise to a row in the html when a user adds an entry
+dataRef.ref(exerciseRef).on("child_added", function(snapshot) {
+    //snapshot.forEach(function(childSnapshot){
+      var exerciseObject = snapshot.val();
+      //console.log(foodObject);
+      var entryTimeConv = moment(exerciseObject.entryTime).format("YYYY-MM-DD");
+      console.log(entryTimeConv);
+      var currentTime = moment().format("YYYY-MM-DD");
+      //var currentTimeConv = moment(currentTime, "DD/MM/YYYY");
+      console.log(currentTime);
+      //var dateDiff = currentTime.diff(entryTimeConv, "days");
+      //console.log(dateDiff);
+  
+      //console.log(dateDiff);
+  
+      if(entryTimeConv === currentTime){
+        appendTable(exerciseObject, entryTimeConv);
+      }
+    //});
+  });
