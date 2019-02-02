@@ -77,8 +77,8 @@ $("#add-nutrition-btn").on("click", function(event){
   console.log(protein);
   console.log(entryTime);
 
-  //Creates local "temporary" object for holding train data
-  var NutritionFact ={
+  //Creates local "temporary" object for holding data
+  var NutritionFact = {
     food: food,
     serving: serving,
     fat:fat,

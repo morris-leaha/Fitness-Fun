@@ -184,7 +184,7 @@ var getChartData =  function(category){
             break;
 
         case "exercise":
-            refChild = "cals-burned";
+            refChild = "total-cals-burned";
             chartTitle = "Daily Calories Burned (Past Week)";
             chartLabel = "Calories";
             chartColor = "#cc5500";
