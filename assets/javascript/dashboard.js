@@ -195,7 +195,7 @@ var getChartData =  function(category){
     var targetRef = uid + "/" + refChild;
     dataRef.ref(targetRef).once("value", function(snapshot){
         for(i = 0; i < 7; i++){
-            var data = snapshot.child(dateInfo[i].refString).val();
+            var data = snapshot.child(dateInfo[i].refString).val()
             var cals = data.totalCals;
             if(!cals){
                 cals = 0;
@@ -250,7 +250,20 @@ dataRef.ref(profileRef).on("child_added", function (childSnapshot) {
     }
 });
 
+$("#sign-out").on("click", function(){
+
+    firebase.auth().signOut().then(function() {
+        sessionStorage.clear();
+        window.location.href = "index.html";
+    }, function(error){
+        console.log("Sign Out Error", error);
+    });
+});
+
+
 //var nutrCanvas = document.getElementById("nutrition-chart").getContext('2d');
 //var nutrData = getChartData("total-cals");
 //renderChart(nutrCanvas, nutrData);
+$("#sign-in").hide();
+$("#sign-up").hide();
 getChartData("nutrition");

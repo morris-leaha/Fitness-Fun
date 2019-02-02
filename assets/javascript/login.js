@@ -44,3 +44,6 @@ $("#login-btn").on("click", function(event){
       console.log(errorMessage);
   });
 });
+
+$("#main-navbar").hide();
+$("#user-dropdown").hide();
