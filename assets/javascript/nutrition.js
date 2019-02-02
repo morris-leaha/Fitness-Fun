@@ -21,6 +21,7 @@ var breakfastCal = 0;
 var lunchCal = 0;
 var dinnerCal = 0;
 var currentDate = moment().format("YYYY-MM-DD");
+var profileRef = "/" + uid + "/profile";
 
 //Form Validation
 var validateNutritionForm = function(nutrition){
