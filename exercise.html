@@ -108,14 +108,15 @@
                         <div class="card exercise-view mb-4">
                             <div class="card-header">
                                 <span class="align-middle"><b>Exercise</b></span>
-
-                                <div class="input-group d-inline-flex float-right col-md-5 px-0 mt-2">
-                                    <input type="search" class="form-control" id="search-input" placeholder="Search..."
+                                <input type="text" name="search" id="search-input">
+                                <input type="button" value="search" id="search-submit">
+                                <!-- <div class="input-group d-inline-flex float-right col-md-5 px-0 mt-2">
+                                    <input type="text" name="search" class="form-control" id="search-input" placeholder="Search..."
                                         aria-label="Exercise Search" aria-describedby="search-submit">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" id="search-submit">Search</button>
+                                        <button class="btn btn-outline-secondary" type="button" value="search" id="search-submit">Search</button>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="card-body">
                                 <table class="table table-sm table-hover" id="exercise-table">
@@ -124,7 +125,7 @@
                                             <th scope="col">Exercise</th>
                                             <th scope="col">Duration</th>
                                             <th scope="col">Calories Burned</th>
-                                            <th scope="col">Video</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -150,7 +151,6 @@
                                         <tr class="text-center">
                                             <th scope="col">Exercise</th>
                                             <th scope="col">Duration (mins)</th>
-                                            <!-- <th scope="col">Calories Burned</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -166,7 +166,9 @@
                                                         <option data-met="5">Baseball/softball</option>
                                                         <option data-met="8">Basketball</option>
                                                         <option data-met="8">Beach volleyball</option>
-                                                        <option data-met="3.8">Bodyweight exercises (push ups, sit ups, pull-ups, lunges etc.)</option>                                                        <option data-met="">Bowling</option>
+                                                        <option data-met="3.8">Bodyweight exercises (push ups, sit ups,
+                                                            pull-ups, lunges etc.)</option>
+                                                        <option data-met="">Bowling</option>
                                                         <option data-met="9">Boxing (punching bag)</option>
                                                         <option data-met="7">Boxing (sparring)</option>
                                                         <option data-met="3">Canoeing/rowing (light effort)</option>
@@ -245,7 +247,7 @@
                                                         <option data-met="4.5">Volleyball</option>
                                                         <option data-met="3">Walking (brisk)</option>
                                                         <option data-met="4">Walking (moderate)</option>
-                                                        <option data-met="3">Walking (slow)</option>                                                        <option data-met="">Water aerobics</option>
+                                                        <option data-met="3">Walking (slow)</option>
                                                         <option data-met="10">Water polo</option>
                                                         <option data-met="6">Water skiing</option>
                                                         <option data-met="6">Weightlifting (moderate effort)</option>
@@ -255,14 +257,7 @@
 
                                                     </select>
 
-
-
                                                 </div>
-
-                                                <!-- <div> -->
-                                                    <!-- <input class="form-control col-auto" id="exercise-name-input"
-                                                        placeholder="Push-Ups" type="text"> -->
-                                                <!-- </div> -->
                                             </td>
                                             <td scope="row" class="exercise-duration">
                                                 <div class="form-group">
@@ -270,12 +265,6 @@
                                                         placeholder="10" type="text">
                                                 </div>
                                             </td>
-                                            <!-- <td scope="row" class="exercise-cals-burned">
-                                                <div class="form-group">
-                                                    <input class="form-control" id="exercise-cals-burned-input"
-                                                        placeholder="30" type="text">
-                                                </div>
-                                            </td> -->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -288,8 +277,14 @@
             </div>
         </main>
     </div>
+    <div id="output"></div>
+    <div class="overlayBg" style="display:none;"></div>
+    <div class="popup" style="display:none;">
 
-
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/dzWc0JTsPhg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
     <footer class="sticky-footer">
         <div class="container text-center">
             <span class="">Copyright &copy; 2018</span>
@@ -306,7 +301,7 @@
     <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <!-- LINK TO AJAX -->
-    <!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- LINK TO JAVASCRIPT -->
     <!-- <script type="text/javascript" src="assets/javascript/app.js"></script> -->
     <script src="assets/javascript/exercise.js"></script>
