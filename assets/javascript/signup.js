@@ -57,3 +57,6 @@ $("#sign-up-btn").on("click", function(event){
     }
     
 });
+
+$("#main-navbar").hide();
+$("#user-dropdown").hide();

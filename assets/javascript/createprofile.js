@@ -14,7 +14,7 @@
 var uid = sessionStorage.getItem("uid");
 console.log(uid);
 var dataRef = firebase.database();
-var profileRef = "/" + uid + "/profile"
+var profileRef = uid + "/profile"
 
 $("#createprofile").on("click", function (event) {
 
@@ -69,4 +69,20 @@ $("#createprofile").on("click", function (event) {
 
   // redirecting user to dashboard.html after 
   window.location.href = "dashboard.html";
+})
+
+$("#sign-out").on("click", function(){
+
+  firebase.auth().signOut().then(function() {
+      sessionStorage.clear();
+      window.location.href = "index.html";
+  }, function(error){
+      console.log("Sign Out Error", error);
+  });
 });
+<<<<<<< HEAD
+=======
+
+$("#navbar-links").hide();
+$("#user-dropdown").hide();
+>>>>>>> 2f1d95410ea5fbbf77540a1dc4a51f5bb38bb4cb
