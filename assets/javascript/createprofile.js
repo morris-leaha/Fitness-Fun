@@ -80,9 +80,6 @@ $("#sign-out").on("click", function(){
       console.log("Sign Out Error", error);
   });
 });
-<<<<<<< HEAD
-=======
 
 $("#navbar-links").hide();
 $("#user-dropdown").hide();
->>>>>>> 2f1d95410ea5fbbf77540a1dc4a51f5bb38bb4cb
