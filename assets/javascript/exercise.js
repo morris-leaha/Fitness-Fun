@@ -105,3 +105,15 @@ dataRef.ref(exerciseRef).on("child_added", function (childSnapshot) {
 
 
 });
+
+$("#sign-out").on("click", function(){
+
+    firebase.auth().signOut().then(function() {
+        sessionStorage.clear();
+        window.location.href = "index.html";
+    }, function(error){
+        console.log("Sign Out Error", error);
+    });
+});
+
+

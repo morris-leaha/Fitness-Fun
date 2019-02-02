@@ -38,6 +38,12 @@ dataRef.ref(profileRef).on("child_added", function (snapshot) {
     $("#userActLevel").text(userActLevel);
 });
 
-if(uid) {
+$("#sign-out").on("click", function(){
 
-}
+    firebase.auth().signOut().then(function() {
+        sessionStorage.clear();
+        window.location.href = "index.html";
+    }, function(error){
+        console.log("Sign Out Error", error);
+    });
+});

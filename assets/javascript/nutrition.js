@@ -91,20 +91,32 @@ $("#add-nutrition-btn").on("click", function(event){
   validateNutritionForm(NutritionFact);
 });
 
+var initTotalCals = function(firstChild, firstValue) {
+  
+  var initRef = firstChild;
+  var initCals = firstValue;
+  dataRef.ref(uid + "/total-cals/" + initRef).push({totalCals: initCals});
+  for(i = 1; i < 7; i++){
+    dateRef = moment().subtract(i, "days").format("YYYY-MM-DD");
+    dataRef.ref(uid + "/total-cals/" + dateRef).update({totalCals: 0})
+  }
+
+
+}
+
 var updateTotalCals = function(cals, time){
 
   var totalCals = cals;
   var entryTime = time;
   dataRef.ref(uid).once("value", function(snapshot){
     if(!snapshot.hasChild("total-cals")){
-      dataRef.ref(uid + "/total-cals/" + entryTime).push(totalCals);
-      console.log("New branch attempted...")
+      initTotalCals(entryTime, totalCals);
     } else {
       dataRef.ref(uid + "/total-cals").once("value", function(snapshot){
         if(!snapshot.hasChild(entryTime)){
-          dataRef.ref(uid + "/total-cals/" + entryTime).push({totalCals: totalCals});
+          dataRef.ref(uid + "/total-cals/" + entryTime).update({totalCals: totalCals});
         } else {
-          dataRef.ref(uid + "/total-cals/").child(entryTime).update({totalCals});
+          dataRef.ref(uid + "/total-cals/" + entryTime).update({totalCals});
         }
       })
     }
@@ -149,4 +161,14 @@ dataRef.ref(nutrRef).on("child_added", function(snapshot) {
       appendTable(foodObject, entryTimeConv);
     }
   //});
+});
+
+$("#sign-out").on("click", function(){
+
+  firebase.auth().signOut().then(function() {
+      sessionStorage.clear();
+      window.location.href = "index.html";
+  }, function(error){
+      console.log("Sign Out Error", error);
+  });
 });
