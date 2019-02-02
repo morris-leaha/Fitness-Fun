@@ -25,7 +25,8 @@ dataRef.ref(profileRef).on("value", function(snapshot){
   snapshot.forEach(function(childSnapshot){
       console.log(childSnapshot.val());
       userWeight = childSnapshot.val().userweight;
-      //console.log(userWeight);    
+      var userFirstName = childSnapshot.val().firstName;
+    $("#nav-username").text(userFirstName);
   });
 });
 //Form Validation
@@ -130,12 +131,12 @@ dataRef.ref(exerciseRef).on("child_added", function (childSnapshot) {
   // Create the new row
 });
 
-dataRef.ref(profileRef).on("child_added", function (childSnapshot) {
+// dataRef.ref(profileRef).on("child_added", function (childSnapshot) {
 
-    // grabbing the values from FB DB and storing relavent info in variables
-    var userFirstName = childSnapshot.val().firstName;
-    $("#nav-username").text(userFirstName);
-});
+//     // grabbing the values from FB DB and storing relavent info in variables
+//     var userFirstName = childSnapshot.val().firstName;
+//     $("#nav-username").text(userFirstName);
+// });
 
 var pageToken = "";
 $(document).ready(function() {
