@@ -130,6 +130,13 @@ dataRef.ref(exerciseRef).on("child_added", function (childSnapshot) {
   // Create the new row
 });
 
+dataRef.ref(profileRef).on("child_added", function (childSnapshot) {
+
+    // grabbing the values from FB DB and storing relavent info in variables
+    var userFirstName = childSnapshot.val().firstName;
+    $("#nav-username").text(userFirstName);
+});
+
 var pageToken = "";
 $(document).ready(function() {
   $(".popup").hide();

@@ -284,6 +284,13 @@ $(document).on("click", ".Api-Name-btn", function (NutApi) {
     }
 });
 
+dataRef.ref(profileRef).on("child_added", function (childSnapshot) {
+
+  // grabbing the values from FB DB and storing relavent info in variables
+  var userFirstName = childSnapshot.val().firstName;
+  $("#nav-username").text(userFirstName);
+});
+
 $("#sign-out").on("click", function(){
 
   firebase.auth().signOut().then(function() {
