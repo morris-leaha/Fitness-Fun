@@ -110,14 +110,17 @@
                                 <span class="align-middle"><b>Nutrition Facts</b></span>
 
                                 <div class="input-group d-inline-flex float-right col-md-5 px-0 mt-2">
-                                    <input type="search" class="form-control" id="search-input" placeholder="Search..."
+                                    <input type="search" class="form-control" id="search-submit" placeholder="Search..."
                                         aria-label="Nutrition Search" aria-describedby="search-submit">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" id="search-submit">Search</button>
+                                        <button class="btn btn-outline-secondary" type="button" id="search-submit-button">Search</button>
                                     </div>
                                     <a class="btn btn-secondary upc-btn ml-2" href="#" role="button" title="Scan Food Item's UPC Code">
                                         <i class="fas fa-barcode"></i>
                                     </a>
+                                </div>
+                                <div class="input-group-append" id="API-button">
+
                                 </div>
                                 <div class="choose-meal-category form-group col-md-2 px-0">
                                     <select class="form-control" id="table-select" type="text" name="Table">
@@ -244,7 +247,7 @@
     <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <!-- LINK TO AJAX -->
-    <!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- LINK TO JAVASCRIPT -->
     <script src="assets/javascript/nutrition.js"></script>
 </body>

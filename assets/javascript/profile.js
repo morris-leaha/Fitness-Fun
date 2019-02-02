@@ -38,6 +38,5 @@ dataRef.ref(profileRef).on("child_added", function (snapshot) {
     $("#userActLevel").text(userActLevel);
 });
 
-if(uid) {
-
-}
+$("#sign-in").hide();
+$("#sign-up").hide();
