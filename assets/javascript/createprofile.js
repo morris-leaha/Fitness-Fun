@@ -69,7 +69,7 @@ $("#createprofile").on("click", function (event) {
 
   // redirecting user to dashboard.html after 
   window.location.href = "dashboard.html";
-});
+})
 
 $("#sign-out").on("click", function(){
 
