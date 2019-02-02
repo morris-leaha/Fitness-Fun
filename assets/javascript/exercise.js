@@ -171,5 +171,15 @@ function searchYoutube(){
     });
 };
 
+$("#sign-out").on("click", function(){
 
-//https://www.googleapis.com/youtube/v3/search?q=test&part=snippet&key=AIzaSyAZJ-ZKG8sb46Z8nFK39RBtpZGqmjEWdOA
+    firebase.auth().signOut().then(function() {
+        sessionStorage.clear();
+        window.location.href = "index.html";
+    }, function(error){
+        console.log("Sign Out Error", error);
+    });
+});
+
+$("#sign-in").hide();
+$("#sign-up").hide();
