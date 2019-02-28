@@ -187,7 +187,7 @@ function searchYoutube() {
       html += '<div class="card-header youtube-title">' + value.snippet.title + '</div>';
       html += '<div class="card-body">';
       // html += '<div class="youtube-url"><a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="_blank">' + value.id.videoId + '</a></div>';
-      html += '<div class="card-text"><a class="youtube-vidThumb"><img class="img-fluid youtube-thumbnail" src="' + value.snippet.thumbnails.medium.url + '" videoID="' + value.id.videoId + '"></a></div>';
+      html += '<div class="card-text"><img class="img-fluid youtube-thumbnail" src="' + value.snippet.thumbnails.medium.url + '" videoID="' + value.id.videoId + '"></div>';
       html += '</div>';
       html += '<div class="card-footer"><small class="text-muted">Click Image To Play Video</small></div>';
       html += '</div>';
