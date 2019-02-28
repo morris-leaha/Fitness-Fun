@@ -21,43 +21,43 @@ var profileRef = "/" + uid + "/profile";
 var userWeight;
 var calsPerExercise = {};
 //Get User's weight
-dataRef.ref(profileRef).on("value", function(snapshot){
-  snapshot.forEach(function(childSnapshot){
-      console.log(childSnapshot.val());
-      userWeight = childSnapshot.val().userweight;
-      var userFirstName = childSnapshot.val().firstName;
+dataRef.ref(profileRef).on("value", function (snapshot) {
+  snapshot.forEach(function (childSnapshot) {
+    console.log(childSnapshot.val());
+    userWeight = childSnapshot.val().userweight;
+    var userFirstName = childSnapshot.val().firstName;
     $("#nav-username").text(userFirstName);
   });
 });
 //Form Validation
 var validateExerciseForm = function (exercise) {
   if (!exercise.exercisename ||
-      !exercise.exerciseduration ||
-      !exercise.calsBurn ||
-      !exercise.exercisecurrentTime
+    !exercise.exerciseduration ||
+    !exercise.calsBurn ||
+    !exercise.exercisecurrentTime
   ) {
-      //console.log("Form Failed");
+    //console.log("Form Failed");
   } else {
-      dataRef.ref(exerciseRef).push(exercise)
-      $("#exercise-name-input").val("");
-      $("#exercise-duration-input").val("");
-      // $("#exercise-cals-burned-input").val("");
+    dataRef.ref(exerciseRef).push(exercise)
+    $("#exercise-name-input").val("");
+    $("#exercise-duration-input").val("");
+    // $("#exercise-cals-burned-input").val("");
   }
 }
-var updateTotalBurnedCals = function(cals, time){
+var updateTotalBurnedCals = function (cals, time) {
 
   var totalCals = cals;
   var entryTime = time;
-  dataRef.ref(uid).once("value", function(snapshot){
-    if(!snapshot.hasChild("total-cals-burned")){
-      dataRef.ref(uid + "/total-cals-burned/" + entryTime).push({totalCals: totalCals});
+  dataRef.ref(uid).once("value", function (snapshot) {
+    if (!snapshot.hasChild("total-cals-burned")) {
+      dataRef.ref(uid + "/total-cals-burned/" + entryTime).push({ totalCals: totalCals });
       console.log("New branch attempted...")
     } else {
-      dataRef.ref(uid + "/total-cals-burned").once("value", function(snapshot){
-        if(!snapshot.hasChild(entryTime)){
-          dataRef.ref(uid + "/total-cals-burned/" + entryTime).push({totalCals: totalCals});
+      dataRef.ref(uid + "/total-cals-burned").once("value", function (snapshot) {
+        if (!snapshot.hasChild(entryTime)) {
+          dataRef.ref(uid + "/total-cals-burned/" + entryTime).push({ totalCals: totalCals });
         } else {
-          dataRef.ref(uid + "/total-cals-burned/").child(entryTime).update({totalCals});
+          dataRef.ref(uid + "/total-cals-burned/").child(entryTime).update({ totalCals });
         }
       })
     }
@@ -65,7 +65,7 @@ var updateTotalBurnedCals = function(cals, time){
 }
 
 var appendTable = function (exerciseData, entryTime) {
-  
+
   var exerciseObject = exerciseData;
   totalBurnedCals += parseInt(exerciseObject.exerciseCalsBurned)
 
@@ -78,7 +78,7 @@ var appendTable = function (exerciseData, entryTime) {
   $("#exercise-body").append(exerciseRow);
   $("#total-cals-burned").text(totalBurnedCals);
   updateTotalBurnedCals(totalBurnedCals, entryTime);
-    
+
 }
 
 // adding exercise to table 
@@ -99,10 +99,10 @@ $("#add-exercise-btn").on("click", function (event) {
   //console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
   // Creates local "temporary" object for holding data
   var exerciseInfo = {
-      exercisename: exercisename,
-      exerciseduration: exerciseduration,
-      calsBurn: calsBurn,
-      exercisecurrentTime: exercisecurrentTime
+    exercisename: exercisename,
+    exerciseduration: exerciseduration,
+    calsBurn: calsBurn,
+    exercisecurrentTime: exercisecurrentTime
   };
   validateExerciseForm(exerciseInfo);
 });
@@ -115,19 +115,19 @@ dataRef.ref(exerciseRef).on("child_added", function (childSnapshot) {
   $("#nav-username").text(userFirstName);
   var entryTimeConv = moment(childSnapshot.val.exercisecurrentTime).format("YYYY-MM-DD");
   //snapshot.forEach(function(childSnapshot)
-    //console.log(foodObject);
-    console.log(entryTimeConv);
-    var currentTime = moment().format("YYYY-MM-DD");
-    //var currentTimeConv = moment(currentTime, "DD/MM/YYYY");
-    console.log(currentTime);
-    //var dateDiff = currentTime.diff(entryTimeConv, "days");
-    //console.log(dateDiff);
+  //console.log(foodObject);
+  console.log(entryTimeConv);
+  var currentTime = moment().format("YYYY-MM-DD");
+  //var currentTimeConv = moment(currentTime, "DD/MM/YYYY");
+  console.log(currentTime);
+  //var dateDiff = currentTime.diff(entryTimeConv, "days");
+  //console.log(dateDiff);
 
-    //console.log(dateDiff);
+  //console.log(dateDiff);
 
-    if (entryTimeConv === currentTime) {
-      appendTable(exerciseObject, entryTimeConv);
-    }
+  if (entryTimeConv === currentTime) {
+    appendTable(exerciseObject, entryTimeConv);
+  }
   // Create the new row
 });
 
@@ -139,52 +139,62 @@ dataRef.ref(exerciseRef).on("child_added", function (childSnapshot) {
 // });
 
 var pageToken = "";
-$(document).ready(function() {
+
+$(document).ready(function () {
   $(".popup").hide();
   $(".overlayBg").hide();
-   
-  $("#search-submit").click(function(){
-  
-      searchYoutube();
-      
+
+  $("#search-submit").click(function () {
+    searchYoutube();
+    // clear search input field ();
   });
 });
-$(".overlayBg").click(function(){
+
+// when user clicks anywhere outside of video, hide pop-up and overlay
+$(".overlayBg").click(function () {
   $(".popup").hide();
   $(".overlayBg").hide();
-})
-$("#output").on("click",".thumbnail", function(){
+});
+
+// when user clicks on video thumbnail:
+$("#output").on("click", ".youtube-thumbnail", function () {
   $(".popup").show();
   $(".overlayBg").show();
   $(window).scrollTop(0);
-  
-  $(".popup iframe").attr("src","https://www.youtube.com/embed/"+$(this).attr('videoID'));
+
+  $(".popup iframe").attr("src", "https://www.youtube.com/embed/" + $(this).attr('videoID'));
 })
-  
-function searchYoutube(){
+
+function searchYoutube() {
   $.ajax({
-      url:"https://www.googleapis.com/youtube/v3/search",
-      dataType:'json',
-      type:'GET',
-      data:{
-          key:'AIzaSyAZJ-ZKG8sb46Z8nFK39RBtpZGqmjEWdOA',
-          q: $("#search-input").val(),
-          part:'snippet',
-          maxResults:5,
-          pageToken: pageToken.current
-      }
-  }).done(function(data){
-      pageToken.nextPage = data.nextPageToken;
-      pageToken.prevPage = data.prevPageToken;
-      var html = "";
-      $.each(data["items"],function(index,value){
-          html += '<div><div class="title">' + value.snippet.title + '</div>';
-          html += '<div><div class="url"><a href="https://www.youtube.com/watch?v=' + value.id.videoId +'" target="_blank">' + value.id.videoId + '</a></div>';
-          html += '<div><img class="thumbnail" src="'+value.snippet.thumbnails.medium.url+'" videoID="'+value.id.videoId+'"></div>';
-          html += '</div>';
-          
-      })
-      $("#output").html(html);
+    url: "https://www.googleapis.com/youtube/v3/search",
+    dataType: 'json',
+    type: 'GET',
+    data: {
+      key: 'AIzaSyAZJ-ZKG8sb46Z8nFK39RBtpZGqmjEWdOA',
+      q: $("#search-input").val(),
+      part: 'snippet',
+      maxResults: 5,
+      pageToken: pageToken.current
+    }
+  }).done(function (data) {
+    pageToken.nextPage = data.nextPageToken;
+    pageToken.prevPage = data.prevPageToken;
+    var html = "";
+    $.each(data["items"], function (index, value) {
+  
+      html += '<div class="card">';
+      html += '<div class="card-header youtube-title">' + value.snippet.title + '</div>';
+      html += '<div class="card-body">';
+      // html += '<div class="youtube-url"><a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="_blank">' + value.id.videoId + '</a></div>';
+      html += '<div class="card-text"><a class="youtube-vidThumb"><img class="img-fluid youtube-thumbnail" src="' + value.snippet.thumbnails.medium.url + '" videoID="' + value.id.videoId + '"></a></div>';
+      html += '</div>';
+      html += '<div class="card-footer"><small class="text-muted">Click Image To Play Video</small></div>';
+      html += '</div>';
+      
+    })
+
+    $("#output").html(html);
   });
 };
 //https://www.googleapis.com/youtube/v3/search?q=test&part=snippet&key=AIzaSyAZJ-ZKG8sb46Z8nFK39RBtpZGqmjEWdOA
