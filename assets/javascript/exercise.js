@@ -198,3 +198,6 @@ function searchYoutube() {
   });
 };
 //https://www.googleapis.com/youtube/v3/search?q=test&part=snippet&key=AIzaSyAZJ-ZKG8sb46Z8nFK39RBtpZGqmjEWdOA
+
+$("#sign-in").hide();
+$("#sign-up").hide();

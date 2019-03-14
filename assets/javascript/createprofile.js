@@ -81,5 +81,5 @@ $("#sign-out").on("click", function(){
   });
 });
 
-$("#navbar-links").hide();
+$("#main-navbar").hide();
 $("#user-dropdown").hide();
